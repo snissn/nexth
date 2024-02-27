@@ -1,8 +1,27 @@
-import { mainnet, sepolia, polygon, optimism, arbitrum, Chain, hardhat } from 'viem/chains'
 
-let chains = [mainnet, sepolia, polygon, optimism, arbitrum] as [Chain, ...Chain[]]
+import { defineChain } from 'viem'
 
-if (process.env.NODE_ENV !== 'production') chains.push(hardhat)
+const fluence = defineChain({
+    rpcUrls: {
+        default: {
+            http: ["http://127.0.0.1:8745"]
+
+        }
+    },
+    name : "Fluence",
+    nativeCurrency: {
+        decimals: 18, 
+        name: "Fluence", 
+        symbol: "FLT"
+    },
+    id: "0x482a2b14a7af",
+    });
+
+import { filecoinCalibration, polygonMumbai, localhost, Chain} from 'viem/chains';
+
+let chains = [filecoinCalibration, polygonMumbai, fluence] as [Chain, ...Chain[]];
+
+
 
 export const ETH_CHAINS = chains
 
