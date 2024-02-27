@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { isValidAddress } from '../utils/address';
 
 type RecipientInputProps = {
   recipient: string;
-  isValidRecipient: boolean;
   onRecipientChange: (recipient: string) => void;
 };
 
-const RecipientInput: React.FC<RecipientInputProps> = ({ recipient, isValidRecipient, onRecipientChange }) => {
+const RecipientInput: React.FC<RecipientInputProps> = ({ recipient, onRecipientChange }) => {
+  // Local state to determine if the recipient is valid
+  const [isValidRecipient, setIsValidRecipient] = useState<boolean>(false);
+
+  // Effect to validate recipient whenever it changes
+  useEffect(() => {
+    setIsValidRecipient(isValidAddress(recipient));
+  }, [recipient]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onRecipientChange(event.target.value);
   };
@@ -30,3 +38,5 @@ const RecipientInput: React.FC<RecipientInputProps> = ({ recipient, isValidRecip
 };
 
 export default RecipientInput;
+
+

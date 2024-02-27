@@ -7,10 +7,12 @@ import BalanceDisplay from './BalanceDisplay'
 import { useTokenTransaction } from '../hooks/useTokenTransaction'
 import { useToast } from '@/context/Toaster'
 import { Address } from '../types'
+import { useAccount } from 'wagmi'
 
 export default function SendToken() {
-  const [tokenAddress, setTokenAddress] = useState<Address>(undefined)
-  const [to, setTo] = useState<Address>(undefined)
+  const { address } = useAccount()
+  const [tokenAddress, setTokenAddress] = useState<Address>("0x721823209A298d4685142bebbbBF02d8907Eae17" as Address)
+  const [to, setTo] = useState<Address>(address)
   const [amount, setAmount] = useState('0.01')
 
   const { showToast } = useToast()
@@ -22,10 +24,6 @@ export default function SendToken() {
     txSuccess,
     isLoading,
   } = useTokenTransaction(tokenAddress, to, amount, showToast)
-
-  console.log("useTokenTransaction", tokenAddress, to, amount, showToast);
-  console.log(balanceData);
-
 
   return (
     <div className='flex-column align-center'>
