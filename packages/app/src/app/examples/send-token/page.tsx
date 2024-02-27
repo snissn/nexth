@@ -1,21 +1,23 @@
+// page.tsx
 'use client'
-import { useState } from 'react'
-import TokenInput from './TokenInput'
-import RecipientInput from './RecipientInput'
-import SendButton from './SendButton'
-import BalanceDisplay from './BalanceDisplay'
-import { useTokenTransaction } from '../hooks/useTokenTransaction'
-import { useToast } from '@/context/Toaster'
-import { Address } from '../types'
-import { useAccount } from 'wagmi'
+import React, { useState, useEffect } from 'react';
+import TokenInput from './TokenInput';
+import RecipientInput from './RecipientInput';
+import SendButton from './SendButton';
+import BalanceDisplay from './BalanceDisplay';
+import TokenAmountInput from './TokenAmountInput'; // Import the new component.
+import { useTokenTransaction } from '../hooks/useTokenTransaction';
+import { useToast } from '@/context/Toaster';
+import { Address } from '../types';
+import { useAccount } from 'wagmi';
 
 export default function SendToken() {
-  const { address } = useAccount()
-  const [tokenAddress, setTokenAddress] = useState<Address>("0x721823209A298d4685142bebbbBF02d8907Eae17" as Address)
-  const [to, setTo] = useState<Address>(address)
-  const [amount, setAmount] = useState('0.01')
+  const { address } = useAccount();
+  const [tokenAddress, setTokenAddress] = useState<Address>("0x721823209A298d4685142bebbbBF02d8907Eae17" as Address);
+  const [to, setTo] = useState<Address>(address);
+  const [amount, setAmount] = useState('0');
 
-  const { showToast } = useToast()
+  const { showToast } = useToast();
   const {
     balanceData,
     estimateError,
@@ -23,7 +25,7 @@ export default function SendToken() {
     txError,
     txSuccess,
     isLoading,
-  } = useTokenTransaction(tokenAddress, to, amount, showToast)
+  } = useTokenTransaction(tokenAddress, to, amount, showToast);
 
   return (
     <div className='flex-column align-center'>
@@ -37,19 +39,24 @@ export default function SendToken() {
           <RecipientInput
             onRecipientChange={setTo}
             recipient={to}
-            setAmount={setAmount}
-            amount={amount}
           />
           <BalanceDisplay
             balanceData={balanceData}
           />
+          <TokenAmountInput
+            balance={balanceData ? balanceData.value : BigInt(0)}
+            decimals={balanceData ? balanceData.decimals : 0}
+            onAmountChange={setAmount}
+          />
           <SendButton
             onClick={handleSendTransaction}
             isLoading={isLoading}
-            isDisabled={!to || estimateError || amount === ''}
+            isDisabled={!to || estimateError || amount === '0'}
           />
         </>
       )}
     </div>
   )
 }
+
+
