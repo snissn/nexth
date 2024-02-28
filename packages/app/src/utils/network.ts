@@ -1,27 +1,23 @@
-
 import { defineChain } from 'viem'
 
 const fluence = defineChain({
-    rpcUrls: {
-        default: {
-            http: ["http://127.0.0.1:8745"]
-
-        }
+  rpcUrls: {
+    default: {
+      http: ['http://127.0.0.1:8745'],
     },
-    name : "Fluence",
-    nativeCurrency: {
-        decimals: 18, 
-        name: "Fluence", 
-        symbol: "FLT"
-    },
-    id: "0x482a2b14a7af",
-    });
+  },
+  name: 'Fluence',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Fluence',
+    symbol: 'FLT',
+  },
+  id: '0x482a2b14a7af',
+})
 
-import { filecoinCalibration, polygonMumbai, localhost, Chain} from 'viem/chains';
+import { filecoinCalibration, polygonMumbai, localhost, Chain } from 'viem/chains'
 
-let chains = [filecoinCalibration, polygonMumbai, fluence] as [Chain, ...Chain[]];
-
-
+let chains = [filecoinCalibration, polygonMumbai, fluence] as [Chain, ...Chain[]]
 
 export const ETH_CHAINS = chains
 
