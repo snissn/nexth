@@ -27,7 +27,7 @@ export default function SendToken() {
   const { error: estimateError } = useSimulateContract({
     address: balanceData && isValidToAddress ? tokenAddress : undefined,
     abi: erc20Abi,
-    functionName: 'transfer',
+    functionName: 'approve',
     args: [to!, parseEther(amount)],
   })
 
@@ -51,7 +51,7 @@ export default function SendToken() {
     writeContract({
       address: tokenAddress!,
       abi: erc20Abi,
-      functionName: 'transfer',
+      functionName: 'approve',
       args: [to!, parseEther(amount)],
     })
   }

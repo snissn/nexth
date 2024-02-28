@@ -11,7 +11,7 @@ import { useToast } from '@/context/Toaster'
 import { useBalance } from 'wagmi'
 import { ethers } from 'ethers'
 import { parseAbi } from 'viem'
-import { erc20Abi } from 'viem';
+import { erc20Abi } from 'viem'
 import Allowance from './Allowance'
 
 const sendLinkedTokenAbi = [
@@ -44,10 +44,6 @@ export default function SendToken() {
   const { showToast } = useToast()
   const contractAddress = '0x3BB90607666d51aF3d3c57e7ee6F7cc8b40490b6' //TODO get from config
 
-
-
-
-
   const { error: estimateError } = useSimulateContract({
     address: contractAddress,
     abi: sendLinkedTokenAbi,
@@ -56,7 +52,6 @@ export default function SendToken() {
   })
 
   const { data, writeContract, isPending, error } = useWriteContract()
-
 
   const {
     isLoading,
@@ -90,7 +85,7 @@ export default function SendToken() {
     token: tokenAddress,
   })
 
-console.log("PARENT", tokenAddress);
+  console.log('PARENT', tokenAddress)
   useEffect(() => {
     if (txSuccess) {
       showToast(`Transaction successful`, {
@@ -111,7 +106,7 @@ console.log("PARENT", tokenAddress);
         <>
           <RecipientInput onRecipientChange={setTo} recipient={to} />
           <BalanceDisplay balanceData={balanceData} />
-          <Allowance contractAddress={contractAddress} amount={amount} tokenAddress={tokenAddress}/>
+          <Allowance contractAddress={contractAddress} amount={amount} tokenAddress={tokenAddress} />
           <TokenAmountInput
             balance={balanceData ? balanceData.value : BigInt(0)}
             decimals={balanceData ? balanceData.decimals : 0}

@@ -13,7 +13,11 @@ export const useTokenTransaction = (tokenAddress: Address, to: Address, amount: 
   // You can include validation and simulation logic here.
   const { data, writeContract } = useWriteContract()
 
-  const { isLoading, error: txError, isSuccess: txSuccess } = useWaitForTransactionReceipt({
+  const {
+    isLoading,
+    error: txError,
+    isSuccess: txSuccess,
+  } = useWaitForTransactionReceipt({
     hash: data,
   })
 
@@ -34,4 +38,3 @@ export const useTokenTransaction = (tokenAddress: Address, to: Address, amount: 
     txSuccess,
   }
 }
-

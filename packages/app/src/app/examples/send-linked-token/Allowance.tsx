@@ -12,12 +12,11 @@ import { useBalance } from 'wagmi'
 import { ethers } from 'ethers'
 import { parseAbi } from 'viem'
 import { erc20Abi } from 'viem'
+import { parseEther } from 'viem'
 
 const Allowance = ({ tokenAddress, contractAddress, amount }) => {
   const [allowance, setAllowance] = useState('0')
   const { address } = useAccount()
-  console.log('tokenAddress', tokenAddress)
-  console.log('contractAddress', contractAddress)
 
   const { showToast } = useToast()
   const { data: allowanceData, error: allowanceError } = useContractRead({
@@ -42,11 +41,10 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
   })
   console.log(y)
 
-
   console.log('estimateError', estimateError)
 
   useEffect(() => {
-      if (estimateError) {
+    if (estimateError) {
       showToast(`Transaction failed: ${estimateError.cause}`, {
         type: 'error',
       })
@@ -66,9 +64,8 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
     address: tokenAddress,
     abi: erc20Abi,
     functionName: 'approve',
-    args: [contractAddress, BigInt(87)] // amount ? ethers.utils.parseUnits(amount, 18) : ethers.constants.Zero],
+    args: [contractAddress, BigInt(87)], // amount ? ethers.utils.parseUnits(amount, 18) : ethers.constants.Zero],
   })
-
 
   const {
     writeContract: writeContract,
@@ -78,11 +75,10 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
     address: tokenAddress,
     abi: erc20Abi,
     functionName: 'approve',
-    args: [contractAddress, BigInt(87)] // amount ? ethers.utils.parseUnits(amount, 18) : ethers.constants.Zero],
+    args: [contractAddress, BigInt(87)], // amount ? ethers.utils.parseUnits(amount, 18) : ethers.constants.Zero],
   })
 
-
-///// new stuff --- 
+  ///// new stuff ---
   const handleClickAllowance = () => {
     if (estimateError) {
       showToast(`Transaction failed: ${estimateError.cause}`, {
@@ -98,11 +94,9 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
     })
   }
 
+  // estimateError
 
-// estimateError
-
-
-///// end new stuff ....
+  ///// end new stuff ....
 
   useEffect(() => {
     if (allowanceError) {

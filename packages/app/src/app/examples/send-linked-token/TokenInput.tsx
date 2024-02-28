@@ -3,8 +3,8 @@ import { isValidAddress } from '../utils/address'
 import { Address } from '../types'
 
 type TokenInputProps = {
-  setTokenAddress: (address: Address) => void,
-  tokenAddress: Address,
+  setTokenAddress: (address: Address) => void
+  tokenAddress: Address
 }
 
 const TokenInput: React.FC<TokenInputProps> = ({ setTokenAddress, tokenAddress }) => {

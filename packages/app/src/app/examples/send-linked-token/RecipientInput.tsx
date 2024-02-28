@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { isValidAddress } from '../utils/address';
+import React, { useState, useEffect } from 'react'
+import { isValidAddress } from '../utils/address'
 
 type RecipientInputProps = {
-  recipient: string;
-  onRecipientChange: (recipient: string) => void;
-};
+  recipient: string
+  onRecipientChange: (recipient: string) => void
+}
 
 const RecipientInput: React.FC<RecipientInputProps> = ({ recipient, onRecipientChange }) => {
   // Local state to determine if the recipient is valid
-  const [isValidRecipient, setIsValidRecipient] = useState<boolean>(false);
+  const [isValidRecipient, setIsValidRecipient] = useState<boolean>(false)
 
   // Effect to validate recipient whenever it changes
   useEffect(() => {
-    setIsValidRecipient(isValidAddress(recipient));
-  }, [recipient]);
+    setIsValidRecipient(isValidAddress(recipient))
+  }, [recipient])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onRecipientChange(event.target.value);
-  };
+    onRecipientChange(event.target.value)
+  }
 
   return (
     <label className='form-control w-full max-w-xs'>
@@ -28,15 +28,11 @@ const RecipientInput: React.FC<RecipientInputProps> = ({ recipient, onRecipientC
         type='text'
         placeholder='0x...'
         value={recipient || ''}
-        className={`input input-bordered w-full max-w-xs ${
-          !isValidRecipient && recipient !== '' ? 'input-error' : ''
-        }`}
+        className={`input input-bordered w-full max-w-xs ${!isValidRecipient && recipient !== '' ? 'input-error' : ''}`}
         onChange={handleChange}
       />
     </label>
-  );
-};
+  )
+}
 
-export default RecipientInput;
-
-
+export default RecipientInput
