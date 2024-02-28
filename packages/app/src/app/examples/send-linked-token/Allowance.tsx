@@ -28,9 +28,30 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
     watch: true,
   })
 
-  console.log('allowanceData', allowanceData)
+  const { error: estimateError } = useSimulateContract({
+    address: tokenAddress,
+    abi: erc20Abi,
+    functionName: 'allowance',
+    args: [address, contractAddress],
+  })
+  const y = useSimulateContract({
+    address: tokenAddress,
+    abi: erc20Abi,
+    functionName: 'allowance',
+    args: [address, contractAddress],
+  })
+  console.log(y)
+
+
+  console.log('estimateError', estimateError)
 
   useEffect(() => {
+      if (estimateError) {
+      showToast(`Transaction failed: ${estimateError.cause}`, {
+        type: 'error',
+      })
+      return
+    }
     if (allowanceError) {
       showToast({
         message: `Error fetching allowance: ${allowanceError.message}`,
@@ -39,7 +60,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
     } else if (allowanceData) {
       setAllowance(ethers.utils.formatUnits(allowanceData, 18))
     }
-  }, [allowanceData, allowanceError, showToast])
+  }, [allowanceData, allowanceError, showToast, estimateError])
 
   const x = useWriteContract({
     address: tokenAddress,
@@ -50,7 +71,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
 
 
   const {
-    writeContract: setAllowanceWrite,
+    writeContract: writeContract,
     isPending: isPendingAllowance,
     error: setAllowanceError,
   } = useWriteContract({
@@ -60,18 +81,28 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
     args: [contractAddress, BigInt(87)] // amount ? ethers.utils.parseUnits(amount, 18) : ethers.constants.Zero],
   })
 
-console.log("amount", amount);
-console.log("amount23", setAllowanceWrite);
+
+///// new stuff --- 
   const handleClickAllowance = () => {
-    if (!amount || isNaN(amount)) {
-      showToast({
-        message: 'Invalid amount for setting allowance',
+    if (estimateError) {
+      showToast(`Transaction failed: ${estimateError.cause}`, {
         type: 'error',
       })
       return
     }
-    setAllowanceWrite()
+    writeContract({
+      address: tokenAddress!,
+      abi: erc20Abi,
+      functionName: 'approve',
+      args: [contractAddress!, ethers.utils.parseUnits(amount, 18)],
+    })
   }
+
+
+// estimateError
+
+
+///// end new stuff ....
 
   useEffect(() => {
     if (allowanceError) {
@@ -80,7 +111,6 @@ console.log("amount23", setAllowanceWrite);
         type: 'error',
       })
     } else if (allowanceData) {
-      console.log('allowanceDataxyz', allowanceData)
       // Make sure the allowance is updated here
       const formattedAllowance = ethers.utils.formatUnits(allowanceData, 18)
       setAllowance(formattedAllowance)
