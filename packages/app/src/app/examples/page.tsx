@@ -5,6 +5,12 @@ import TokenIcon from '@/assets/icons/token.png'
 
 const ExampleItems = [
   {
+    title: 'Send Linked Tokens',
+    description: 'Use IPC to send axelar USDC to your Fluence subnet',
+    image: EtherIcon.src,
+    url: '/examples/send-linked-token',
+  },
+  {
     title: 'Send Ether',
     description: 'Sending Ether to another address is the most basic, common transaction that you can do.',
     image: EtherIcon.src,
