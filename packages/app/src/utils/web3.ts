@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
 import { cookieStorage, createStorage } from 'wagmi'
