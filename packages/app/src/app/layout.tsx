@@ -1,3 +1,4 @@
+"use client";
 import type { Metadata } from 'next'
 import { PropsWithChildren } from 'react'
 import { SITE_DESCRIPTION, SITE_NAME } from '@/utils/site'
