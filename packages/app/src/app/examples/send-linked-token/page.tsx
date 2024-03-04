@@ -40,13 +40,14 @@ export default function SendToken() {
   const [tokenAddress, setTokenAddress] = useState('0x721823209A298d4685142bebbbBF02d8907Eae17') // TODO get from config
   const [to, setTo] = useState()
   const [amount, setAmount] = useState('0')
+  const [allowance, setAllowance] = useState('0')
 
   const { showToast } = useToast()
   const contractAddress = '0xCcbF0c7799667323E52b4cAc41a9be5275e4EaF9' // TODO get from config
 
   const tokenDigits = 18 // TODO get from config
 
-  const amountArgs = amount ? ethers.parseUnits(amount, tokenDigits) : 0;
+  const amountArgs = amount ? ethers.parseUnits(amount, tokenDigits) : 0
 
   const contractCallArgs = {
     address: contractAddress,
@@ -55,7 +56,7 @@ export default function SendToken() {
     args: [to!, amountArgs],
   }
 
-  const { error: estimateError } = useSimulateContract(contractCallArgs);
+  const { error: estimateError } = useSimulateContract(contractCallArgs)
   const { data, writeContract, isPending, error } = useWriteContract()
 
   const {
@@ -67,7 +68,7 @@ export default function SendToken() {
   })
 
   const handleSendClick = async () => {
-    writeContract(contractCallArgs);
+    writeContract(contractCallArgs)
   }
 
   const { data: balanceData } = useBalance({
@@ -76,8 +77,8 @@ export default function SendToken() {
   })
 
   useEffect(() => {
-      setTo(address);
-  }, [address]);
+    setTo(address)
+  }, [address])
 
   useEffect(() => {
     if (txSuccess) {
@@ -104,12 +105,20 @@ export default function SendToken() {
             decimals={balanceData ? balanceData.decimals : 0}
             onAmountChange={setAmount}
           />
-          <Allowance contractAddress={contractAddress} amount={amount} tokenAddress={tokenAddress} />
+          <Allowance
+            contractAddress={contractAddress}
+            amount={amount}
+            tokenAddress={tokenAddress}
+            allowance={allowance}
+            setAllowance={setAllowance}
+          />
           <Button
             text='Send tokens'
             onClick={handleSendClick}
             isLoading={isPending}
-            isDisabled={!to || !amount || amount === '0' || isPending}
+            isDisabled={
+              !to || !amount || amount === '0' || isPending || ethers.parseUnits(amount, tokenDigits) > allowance
+            }
           />
         </>
       )}

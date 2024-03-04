@@ -14,8 +14,7 @@ import { parseAbi } from 'viem'
 import { erc20Abi } from 'viem'
 import { parseEther } from 'viem'
 
-const Allowance = ({ tokenAddress, contractAddress, amount }) => {
-  const [allowance, setAllowance] = useState('0')
+const Allowance = ({ tokenAddress, contractAddress, amount, allowance, setAllowance }) => {
   const { address } = useAccount()
 
   const tokenDigits = 18 // TODO get from config
@@ -70,7 +69,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
     address: tokenAddress,
     abi: erc20Abi,
     functionName: 'approve',
-    args: [contractAddress!, ethers.parseUnits(amount, tokenDigits)],
+    args: [contractAddress!, amount ? ethers.parseUnits(amount, tokenDigits) : 0],
   })
 
   ///// new stuff ---
@@ -85,7 +84,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
       address: tokenAddress!,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [contractAddress!, ethers.parseUnits(amount, tokenDigits)],
+      args: [contractAddress!, amount ? ethers.parseUnits(amount, tokenDigits) : 0],
     })
   }
 
@@ -127,7 +126,9 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
         text='Update allowance'
         onClick={handleClickAllowance}
         isLoading={isPendingAllowance}
-        isDisabled={!amount || amount === '0' || isPendingAllowance || (ethers.parseUnits(amount, tokenDigits)< allowanceData)}
+        isDisabled={
+          !amount || amount === '0' || isPendingAllowance || ethers.parseUnits(amount, tokenDigits) < allowanceData
+        }
       />
     </>
   )
