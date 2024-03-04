@@ -99,12 +99,12 @@ export default function SendToken() {
         <>
           <RecipientInput onRecipientChange={setTo} recipient={to} />
           <BalanceDisplay balanceData={balanceData} />
-          <Allowance contractAddress={contractAddress} amount={amount} tokenAddress={tokenAddress} />
           <TokenAmountInput
             balance={balanceData ? balanceData.value : BigInt(0)}
             decimals={balanceData ? balanceData.decimals : 0}
             onAmountChange={setAmount}
           />
+          <Allowance contractAddress={contractAddress} amount={amount} tokenAddress={tokenAddress} />
           <Button
             text='Send tokens'
             onClick={handleSendClick}

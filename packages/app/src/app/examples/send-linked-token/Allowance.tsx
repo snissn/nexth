@@ -18,6 +18,8 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
   const [allowance, setAllowance] = useState('0')
   const { address } = useAccount()
 
+  const tokenDigits = 18 // TODO get from config
+
   const { showToast } = useToast()
   const { data: allowanceData, error: allowanceError } = useContractRead({
     address: tokenAddress,
@@ -56,16 +58,9 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
         type: 'error',
       })
     } else if (allowanceData) {
-      setAllowance(ethers.formatUnits(allowanceData, 18))
+      setAllowance(ethers.formatUnits(allowanceData, tokenDigits))
     }
   }, [allowanceData, allowanceError, showToast, estimateError])
-
-  const x = useWriteContract({
-    address: tokenAddress,
-    abi: erc20Abi,
-    functionName: 'approve',
-    args: [contractAddress, BigInt(87)], // amount ? ethers.parseUnits(amount, 18) : ethers.constants.Zero],
-  })
 
   const {
     writeContract: writeContract,
@@ -75,7 +70,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
     address: tokenAddress,
     abi: erc20Abi,
     functionName: 'approve',
-    args: [contractAddress, BigInt(87)], // amount ? ethers.parseUnits(amount, 18) : ethers.constants.Zero],
+    args: [contractAddress!, ethers.parseUnits(amount, tokenDigits)],
   })
 
   ///// new stuff ---
@@ -90,7 +85,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
       address: tokenAddress!,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [contractAddress!, ethers.parseUnits(amount, 18)],
+      args: [contractAddress!, ethers.parseUnits(amount, tokenDigits)],
     })
   }
 
@@ -106,14 +101,14 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
       })
     } else if (allowanceData) {
       // Make sure the allowance is updated here
-      const formattedAllowance = ethers.formatUnits(allowanceData, 18)
+      const formattedAllowance = ethers.formatUnits(allowanceData, tokenDigits)
       setAllowance(formattedAllowance)
     }
   }, [allowanceData, allowanceError, showToast])
 
   let allowanceDataStr = 'Fetching...'
   if (allowanceData || allowanceData == 0) {
-    allowanceDataStr = ethers.formatUnits(allowanceData, 18)
+    allowanceDataStr = ethers.formatUnits(allowanceData, tokenDigits)
   }
 
   useEffect(() => {
@@ -132,7 +127,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
         text='Update allowance'
         onClick={handleClickAllowance}
         isLoading={isPendingAllowance}
-        isDisabled={!amount || amount === '0' || isPendingAllowance}
+        isDisabled={!amount || amount === '0' || isPendingAllowance || (ethers.parseUnits(amount, tokenDigits)< allowanceData)}
       />
     </>
   )
