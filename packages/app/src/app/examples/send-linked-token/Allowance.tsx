@@ -56,7 +56,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
         type: 'error',
       })
     } else if (allowanceData) {
-      setAllowance(ethers.utils.formatUnits(allowanceData, 18))
+      setAllowance(ethers.formatUnits(allowanceData, 18))
     }
   }, [allowanceData, allowanceError, showToast, estimateError])
 
@@ -64,7 +64,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
     address: tokenAddress,
     abi: erc20Abi,
     functionName: 'approve',
-    args: [contractAddress, BigInt(87)], // amount ? ethers.utils.parseUnits(amount, 18) : ethers.constants.Zero],
+    args: [contractAddress, BigInt(87)], // amount ? ethers.parseUnits(amount, 18) : ethers.constants.Zero],
   })
 
   const {
@@ -75,7 +75,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
     address: tokenAddress,
     abi: erc20Abi,
     functionName: 'approve',
-    args: [contractAddress, BigInt(87)], // amount ? ethers.utils.parseUnits(amount, 18) : ethers.constants.Zero],
+    args: [contractAddress, BigInt(87)], // amount ? ethers.parseUnits(amount, 18) : ethers.constants.Zero],
   })
 
   ///// new stuff ---
@@ -90,7 +90,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
       address: tokenAddress!,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [contractAddress!, ethers.utils.parseUnits(amount, 18)],
+      args: [contractAddress!, ethers.parseUnits(amount, 18)],
     })
   }
 
@@ -106,14 +106,14 @@ const Allowance = ({ tokenAddress, contractAddress, amount }) => {
       })
     } else if (allowanceData) {
       // Make sure the allowance is updated here
-      const formattedAllowance = ethers.utils.formatUnits(allowanceData, 18)
+      const formattedAllowance = ethers.formatUnits(allowanceData, 18)
       setAllowance(formattedAllowance)
     }
   }, [allowanceData, allowanceError, showToast])
 
   let allowanceDataStr = 'Fetching...'
   if (allowanceData || allowanceData == 0) {
-    allowanceDataStr = ethers.utils.formatUnits(allowanceData, 18)
+    allowanceDataStr = ethers.formatUnits(allowanceData, 18)
   }
 
   useEffect(() => {
