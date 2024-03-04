@@ -14,15 +14,19 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
 }
 
-export default function RootLayout(props: PropsWithChildren) {
-  const initialState = cookieToInitialState(WALLETCONNECT_CONFIG, headers().get('cookie'))
+// You can use getServerSideProps or getInitialProps to handle server-side logic
+RootLayout.getInitialProps = async ({ req }) => {
+  const initialState = cookieToInitialState(WALLETCONNECT_CONFIG, req.headers.cookie)
+  return { initialState }
+}
 
+export default function RootLayout({ children, initialState }) {
   return (
     <html lang='en'>
       <body>
         <Web3Provider initialState={initialState}>
           <ToastProvider>
-            <Layout>{props.children}</Layout>
+            <Layout>{children}</Layout>
           </ToastProvider>
         </Web3Provider>
       </body>
