@@ -37,20 +37,25 @@ const sendLinkedTokenAbi = [
 
 export default function SendToken() {
   const { address } = useAccount()
-  const [tokenAddress, setTokenAddress] = useState('0x721823209A298d4685142bebbbBF02d8907Eae17')
-  const [to, setTo] = useState(address)
+  const [tokenAddress, setTokenAddress] = useState('0x721823209A298d4685142bebbbBF02d8907Eae17') // TODO get from config
+  const [to, setTo] = useState()
   const [amount, setAmount] = useState('0')
 
   const { showToast } = useToast()
-  const contractAddress = '0x3BB90607666d51aF3d3c57e7ee6F7cc8b40490b6' //TODO get from config
+  const contractAddress = '0xCcbF0c7799667323E52b4cAc41a9be5275e4EaF9' // TODO get from config
 
-  const { error: estimateError } = useSimulateContract({
+  const tokenDigits = 18 // TODO get from config
+
+  const amountArgs = amount ? ethers.parseUnits(amount, tokenDigits) : 0;
+
+  const contractCallArgs = {
     address: contractAddress,
     abi: sendLinkedTokenAbi,
     functionName: 'linkedTransfer',
-    args: [to!, BigInt(7)],
-  })
+    args: [to!, amountArgs],
+  }
 
+  const { error: estimateError } = useSimulateContract(contractCallArgs);
   const { data, writeContract, isPending, error } = useWriteContract()
 
   const {
@@ -62,22 +67,7 @@ export default function SendToken() {
   })
 
   const handleSendClick = async () => {
-    /*
-    writeContract({
-    address: contractAddress,
-    //abi: parseAbi(['function linkedTransfer(address recipient, uint256 tokenId)']),
-  abi: parseAbi(['function mint(uint256 tokenId)']),
-    functionName: 'mint',
-    //args: [to, BigInt(1)], //ethers.utils.parseUnits(amount, 18)],
-    args: [ BigInt(1)],
-  });
-    */
-    writeContract({
-      address: contractAddress,
-      abi: sendLinkedTokenAbi,
-      functionName: 'linkedTransfer',
-      args: [to!, BigInt(7)],
-    })
+    writeContract(contractCallArgs);
   }
 
   const { data: balanceData } = useBalance({
@@ -85,7 +75,10 @@ export default function SendToken() {
     token: tokenAddress,
   })
 
-  console.log('PARENT', tokenAddress)
+  useEffect(() => {
+      setTo(address);
+  }, [address]);
+
   useEffect(() => {
     if (txSuccess) {
       showToast(`Transaction successful`, {
