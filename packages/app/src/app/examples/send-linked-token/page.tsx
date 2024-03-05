@@ -13,6 +13,8 @@ import { ethers } from 'ethers'
 import { parseAbi } from 'viem'
 import { erc20Abi } from 'viem'
 import Allowance from './Allowance'
+import { useChainId } from 'wagmi'
+import { useWeb3Modal } from '@web3modal/wagmi/react'
 
 const sendLinkedTokenAbi = [
   {
@@ -37,10 +39,13 @@ const sendLinkedTokenAbi = [
 
 export default function SendToken() {
   const { address } = useAccount()
+  const chainId = useChainId()
   const [tokenAddress, setTokenAddress] = useState('0x721823209A298d4685142bebbbBF02d8907Eae17') // TODO get from config
   const [to, setTo] = useState()
   const [amount, setAmount] = useState('0')
   const [allowance, setAllowance] = useState('0')
+
+  const { open: openModal } = useWeb3Modal()
 
   const { showToast } = useToast()
   const contractAddress = '0xCcbF0c7799667323E52b4cAc41a9be5275e4EaF9' // TODO get from config
@@ -90,36 +95,47 @@ export default function SendToken() {
     }
   }, [txSuccess, txError])
 
-  return (
-    <div className='flex-column align-center'>
-      <h1 className='text-xl'>Send Linked ERC-20 Token</h1>
-      <TokenInput />
-      {tokenAddress && (
-        <>
-          <RecipientInput onRecipientChange={setTo} recipient={to} />
-          <BalanceDisplay balanceData={balanceData} />
-          <TokenAmountInput
-            balance={balanceData ? balanceData.value : BigInt(0)}
-            decimals={balanceData ? balanceData.decimals : 0}
-            onAmountChange={setAmount}
-          />
-          <Allowance
-            contractAddress={contractAddress}
-            amount={amount}
-            tokenAddress={tokenAddress}
-            allowance={allowance}
-            setAllowance={setAllowance}
-          />
-          <Button
-            text='Send tokens'
-            onClick={handleSendClick}
-            isLoading={isPending}
-            isDisabled={
-              !to || !amount || amount === '0' || isPending || amount > ethers.parseUnits(allowance, tokenDigits)
-            }
-          />
-        </>
-      )}
-    </div>
-  )
+  if (chainId == 314159) {
+    return (
+      <div className='flex-column align-center'>
+        <h1 className='text-xl'>Send Linked ERC-20 Token</h1>
+        <TokenInput />
+        {tokenAddress && (
+          <>
+            <RecipientInput onRecipientChange={setTo} recipient={to} />
+            <BalanceDisplay balanceData={balanceData} />
+            <TokenAmountInput
+              balance={balanceData ? balanceData.value : BigInt(0)}
+              decimals={balanceData ? balanceData.decimals : 0}
+              onAmountChange={setAmount}
+            />
+            <Allowance
+              contractAddress={contractAddress}
+              amount={amount}
+              tokenAddress={tokenAddress}
+              allowance={allowance}
+              setAllowance={setAllowance}
+            />
+            <Button
+              text='Send tokens'
+              onClick={handleSendClick}
+              isLoading={isPending}
+              isDisabled={
+                !to || !amount || amount === '0' || isPending || amount > ethers.parseUnits(allowance, tokenDigits)
+              }
+            />
+          </>
+        )}
+      </div>
+    )
+  } else {
+    return (
+      <div className='flex-column align-center'>
+        <h1 className='text-xl'>Send Linked ERC-20 Token</h1>
+        <button className='btn btn-wide w-[100%]' onClick={() => openModal({ view: 'Account' })}>
+          Connect to Calibration Network
+        </button>
+      </div>
+    )
+  }
 }
