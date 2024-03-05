@@ -11,6 +11,12 @@ const ExampleItems = [
     url: '/examples/send-linked-token',
   },
   {
+    title: 'Destroy Linked Tokens',
+    description: 'Use IPC to release axelar USDC on calibration network',
+    image: EtherIcon.src,
+    url: '/examples/destroy-linked-token',
+  },
+  {
     title: 'Send Ether',
     description: 'Sending Ether to another address is the most basic, common transaction that you can do.',
     image: EtherIcon.src,
