@@ -1,10 +1,10 @@
 import { defineChain } from 'viem'
 
 const fluence = defineChain({
-  blockExplorers: { default : {name: "TBD", url: "https://place.holder.com"} } , // TODO
+  blockExplorers: { default: { name: 'TBD', url: 'https://place.holder.com' } }, // TODO
   rpcUrls: {
     default: {
-      http: ['http://localhost:8010/proxy'] // need cors proxy
+      http: ['http://localhost:8010/proxy'], // need cors proxy
       // lcp --proxyUrl http://localhost:8745
     },
   },
