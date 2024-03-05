@@ -21,9 +21,9 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, 
   }, [amount, onAmountChange])
 
   const handleSliderChange = (value: number) => {
-    const newAmount = BigInt(value) * balance / BigInt(100);
+    const newAmount = (BigInt(value) * balance) / BigInt(100)
 
-    console.log("AMOUNT", newAmount);
+    console.log('AMOUNT', newAmount)
     setAmount(newAmount)
     setSliderValue(value)
   }
@@ -50,7 +50,7 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, 
       />
       <input
         type='text'
-        value={ amount ? ethers.formatUnits(amount, tokenDigits) : 0 }
+        value={amount ? ethers.formatUnits(amount, tokenDigits) : 0}
         placeholder='Amount'
         className='input input-bordered w-full max-w-xs'
         onChange={handleAmountChange}

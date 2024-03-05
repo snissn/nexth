@@ -69,7 +69,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount, allowance, setAllowa
     address: tokenAddress,
     abi: erc20Abi,
     functionName: 'approve',
-    args: [contractAddress!, amount ],
+    args: [contractAddress!, amount],
   })
 
   ///// new stuff ---
@@ -84,7 +84,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount, allowance, setAllowa
       address: tokenAddress!,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [contractAddress!, amount ],
+      args: [contractAddress!, amount],
     })
   }
 
@@ -126,9 +126,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount, allowance, setAllowa
         text='Update allowance'
         onClick={handleClickAllowance}
         isLoading={isPendingAllowance}
-        isDisabled={
-          !amount || amount === '0' || isPendingAllowance || amount <= allowanceData
-        }
+        isDisabled={!amount || amount === '0' || isPendingAllowance || amount <= allowanceData}
       />
     </>
   )

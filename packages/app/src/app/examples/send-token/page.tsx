@@ -59,13 +59,13 @@ export default function SendToken() {
   const handleTokenAddressInput = (token: string) => {
     if (token.startsWith('0x')) setTokenAddress(token as `0x${string}`)
     else setTokenAddress(`0x${token}`)
-    setIsValidTokenAddress(ethers.utils.isAddress(token))
+    setIsValidTokenAddress(ethers.isAddress(token))
   }
 
   const handleToAdressInput = (to: string) => {
     if (to.startsWith('0x')) setTo(to as `0x${string}`)
     else setTo(`0x${to}`)
-    setIsValidToAddress(ethers.utils.isAddress(to))
+    setIsValidToAddress(ethers.isAddress(to))
   }
 
   useEffect(() => {
