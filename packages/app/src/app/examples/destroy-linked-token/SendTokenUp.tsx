@@ -96,7 +96,7 @@ export default function SendTokenUp() {
   if ( chainId == 2443544213400835 ){  // TODO get from config
   return (
     <div className='flex-column align-center'>
-      <h1 className='text-xl'>Send Linked ERC-20 Token</h1>
+      <h1 className='text-xl'>Deposit Linked ERC-20 Token</h1>
       <TokenInput />
       {tokenAddress && (
         <>
