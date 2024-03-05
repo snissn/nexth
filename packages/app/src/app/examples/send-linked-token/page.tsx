@@ -47,13 +47,11 @@ export default function SendToken() {
 
   const tokenDigits = 18 // TODO get from config
 
-  const amountArgs = amount ? ethers.parseUnits(amount, tokenDigits) : 0
-
   const contractCallArgs = {
     address: contractAddress,
     abi: sendLinkedTokenAbi,
     functionName: 'linkedTransfer',
-    args: [to!, amountArgs],
+    args: [to!, amount],
   }
 
   const { error: estimateError } = useSimulateContract(contractCallArgs)
@@ -92,6 +90,7 @@ export default function SendToken() {
     }
   }, [txSuccess, txError])
 
+
   return (
     <div className='flex-column align-center'>
       <h1 className='text-xl'>Send Linked ERC-20 Token</h1>
@@ -117,7 +116,7 @@ export default function SendToken() {
             onClick={handleSendClick}
             isLoading={isPending}
             isDisabled={
-              !to || !amount || amount === '0' || isPending || ethers.parseUnits(amount, tokenDigits) > allowance
+              !to || !amount || amount === '0' || isPending || amount > ethers.parseUnits(allowance, tokenDigits)
             }
           />
         </>

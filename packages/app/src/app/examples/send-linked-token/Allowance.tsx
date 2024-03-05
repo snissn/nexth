@@ -69,7 +69,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount, allowance, setAllowa
     address: tokenAddress,
     abi: erc20Abi,
     functionName: 'approve',
-    args: [contractAddress!, amount ? ethers.parseUnits(amount, tokenDigits) : 0],
+    args: [contractAddress!, amount ],
   })
 
   ///// new stuff ---
@@ -84,7 +84,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount, allowance, setAllowa
       address: tokenAddress!,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [contractAddress!, amount ? ethers.parseUnits(amount, tokenDigits) : 0],
+      args: [contractAddress!, amount ],
     })
   }
 
@@ -127,7 +127,7 @@ const Allowance = ({ tokenAddress, contractAddress, amount, allowance, setAllowa
         onClick={handleClickAllowance}
         isLoading={isPendingAllowance}
         isDisabled={
-          !amount || amount === '0' || isPendingAllowance || ethers.parseUnits(amount, tokenDigits) < allowanceData
+          !amount || amount === '0' || isPendingAllowance || amount <= allowanceData
         }
       />
     </>

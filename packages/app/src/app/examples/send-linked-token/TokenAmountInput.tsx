@@ -1,10 +1,14 @@
+'use client'
 import React, { useState, useEffect } from 'react'
+import { ethers } from 'ethers'
 
 type TokenAmountInputProps = {
   balance: bigint
   decimals: number
   onAmountChange: (amount: string) => void
 }
+
+const tokenDigits = 18 // TODO get from config
 
 const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, onAmountChange }) => {
   const [amount, setAmount] = useState('')
@@ -17,7 +21,9 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, 
   }, [amount, onAmountChange])
 
   const handleSliderChange = (value: number) => {
-    const newAmount = ((maxAmount * value) / 100).toFixed(decimals)
+    const newAmount = BigInt(value) * balance / BigInt(100);
+
+    console.log("AMOUNT", newAmount);
     setAmount(newAmount)
     setSliderValue(value)
   }
@@ -44,7 +50,7 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, 
       />
       <input
         type='text'
-        value={amount}
+        value={ amount ? ethers.formatUnits(amount, tokenDigits) : 0 }
         placeholder='Amount'
         className='input input-bordered w-full max-w-xs'
         onChange={handleAmountChange}
