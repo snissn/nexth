@@ -5,16 +5,10 @@ import TokenIcon from '@/assets/icons/token.png'
 
 const ExampleItems = [
   {
-    title: 'Send Linked Tokens',
+    title: 'Manage Linked USDC Tokens',
     description: 'Use IPC to send axelar USDC to your Fluence subnet',
     image: EtherIcon.src,
-    url: '/examples/send-linked-token',
-  },
-  {
-    title: 'Destroy Linked Tokens',
-    description: 'Use IPC to release axelar USDC on calibration network',
-    image: EtherIcon.src,
-    url: '/examples/destroy-linked-token',
+    url: '/examples/linked-token',
   },
   {
     title: 'Send Ether',

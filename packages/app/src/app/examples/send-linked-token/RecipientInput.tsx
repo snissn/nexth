@@ -21,11 +21,8 @@ const RecipientInput: React.FC<RecipientInputProps> = ({ recipient, onRecipientC
 
   return (
     <label className='form-control w-full max-w-xs'>
-      <div className='label'>
-        <span className='label-text'>Recipient address</span>
-      </div>
       <input
-        type='text'
+        type='hidden'
         placeholder='0x...'
         value={recipient || ''}
         className={`input input-bordered w-full max-w-xs ${!isValidRecipient && recipient !== '' ? 'input-error' : ''}`}
