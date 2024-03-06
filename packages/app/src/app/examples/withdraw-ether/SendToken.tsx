@@ -48,8 +48,8 @@ const fundAbi = [
   },
 ]
 
-const subnetAddress = '0x5dc06b5a4c79646f332b2e6fdccc20138cd61faa' // TODO get from config
-const subnetId = { root: 314159, route: [subnetAddress] }
+const subnetAddress = '0x77aa40b105843728088c0132e43fc44348881da8' // TODO get from config
+const subnetId = { root: 314159, route: [] }
 const EAM_ACTOR = 10
 const DELEGATED = 4
 
@@ -69,10 +69,12 @@ export default function SendToken() {
 
   const tokenDigits = 18 // TODO get from config
 
-  const fvmTo = address ?  {
-    addrType: DELEGATED,
-    payload: encoder.encode(['bytes'], [ethers.solidityPacked(['uint8', 'bytes20'], [EAM_ACTOR, address])]),
-  } : {}
+  const fvmTo = address
+    ? {
+        addrType: DELEGATED,
+        payload: encoder.encode(['bytes'], [ethers.solidityPacked(['uint8', 'bytes20'], [EAM_ACTOR, address])]),
+      }
+    : {}
 
   const contractCallArgs = {
     address: contractAddress,
@@ -84,7 +86,7 @@ export default function SendToken() {
 
   const { error: estimateError } = useSimulateContract(contractCallArgs)
   const { data, writeContract, isPending, error } = useWriteContract()
-  console.log('estimate error', estimateError);
+  console.log('estimate error', estimateError)
 
   const {
     isLoading,
@@ -95,7 +97,11 @@ export default function SendToken() {
   })
 
   const handleSendClick = async () => {
-    writeContract(contractCallArgs)
+    console.log(contractCallArgs)
+    const x = await writeContract(contractCallArgs)
+    console.log('fund', x)
+    console.log(isPending)
+    console.log(error)
   }
 
   const { data: balanceData } = useBalance({
@@ -118,10 +124,10 @@ export default function SendToken() {
     }
   }, [txSuccess, txError])
 
-  if (chainId == 314159) {
+  if ( chainId == 2443544213400835 ){  // TODO get from config
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Deposit Funds</h1>
+        <h1 className='text-xl'>Withdraw Linked ERC-20 Token</h1>
         <>
           <RecipientInput onRecipientChange={setTo} recipient={to} />
           <BalanceDisplay balanceData={balanceData} />
@@ -142,9 +148,9 @@ export default function SendToken() {
   } else {
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Send Linked ERC-20 Token</h1>
+        <h1 className='text-xl'>Withdraw Funds</h1>
         <button className='btn btn-wide w-[100%]' onClick={() => openModal({ view: 'Account' })}>
-          Connect to Calibration Network
+          Connect to Fluence IPC Network
         </button>
       </div>
     )
