@@ -14,10 +14,8 @@ import { parseAbi } from 'viem'
 import { erc20Abi } from 'viem'
 import { parseEther } from 'viem'
 
-const Allowance = ({ tokenAddress, contractAddress, amount, allowance, setAllowance }) => {
+const Allowance = ({ tokenAddress, contractAddress, amount, allowance, setAllowance, tokenDigits }) => {
   const { address } = useAccount()
-
-  const tokenDigits = 18 // TODO get from config
 
   const { showToast } = useToast()
   const { data: allowanceData, error: allowanceError } = useContractRead({

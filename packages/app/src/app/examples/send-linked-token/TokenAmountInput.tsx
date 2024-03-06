@@ -8,9 +8,7 @@ type TokenAmountInputProps = {
   onAmountChange: (amount: string) => void
 }
 
-const tokenDigits = 18 // TODO get from config
-
-const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, onAmountChange }) => {
+const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, onAmountChange, tokenDigits }) => {
   const [amount, setAmount] = useState('')
   const [sliderValue, setSliderValue] = useState(0)
 

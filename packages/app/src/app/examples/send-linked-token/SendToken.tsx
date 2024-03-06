@@ -108,6 +108,7 @@ export default function SendToken() {
               balance={balanceData ? balanceData.value : BigInt(0)}
               decimals={balanceData ? balanceData.decimals : 0}
               onAmountChange={setAmount}
+              tokenDigits={tokenDigits}
             />
             <Allowance
               contractAddress={contractAddress}
@@ -115,6 +116,7 @@ export default function SendToken() {
               tokenAddress={tokenAddress}
               allowance={allowance}
               setAllowance={setAllowance}
+              tokenDigits={tokenDigits}
             />
             <Button
               text='Send tokens'
