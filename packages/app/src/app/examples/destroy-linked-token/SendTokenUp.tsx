@@ -12,8 +12,8 @@ import { useBalance } from 'wagmi'
 import { ethers } from 'ethers'
 import { parseAbi } from 'viem'
 import { erc20Abi } from 'viem'
- 
-import { useChainId } from 'wagmi';
+
+import { useChainId } from 'wagmi'
 import { useWeb3Modal } from '@web3modal/wagmi/react'
 
 const sendLinkedTokenAbi = [
@@ -39,7 +39,7 @@ const sendLinkedTokenAbi = [
 
 export default function SendTokenUp() {
   const { address } = useAccount()
-  const  chainId  = useChainId();
+  const chainId = useChainId()
   const { open: openModal } = useWeb3Modal()
   const [tokenAddress, setTokenAddress] = useState('0x427eD285e9d0662D4859a891499Fe3614CC8F7D1') // TODO get from config
   const [to, setTo] = useState()
@@ -93,40 +93,41 @@ export default function SendTokenUp() {
     }
   }, [txSuccess, txError])
 
-  if ( chainId == 2443544213400835 ){  // TODO get from config
-  return (
-    <div className='flex-column align-center'>
-      <h1 className='text-xl'>Deposit Linked ERC-20 Token</h1>
-      <TokenInput />
-      {tokenAddress && (
-        <>
-          <RecipientInput onRecipientChange={setTo} recipient={to} />
-          <BalanceDisplay balanceData={balanceData} />
-          <TokenAmountInput
-            balance={balanceData ? balanceData.value : BigInt(0)}
-            decimals={balanceData ? balanceData.decimals : 0}
-            onAmountChange={setAmount}
-          />
-          <Button
-            text='Send tokens'
-            onClick={handleSendClick}
-            isLoading={isPending}
-            isDisabled={
-              !to || !amount || amount === '0' || isPending || amount > ethers.parseUnits(allowance, tokenDigits)
-            }
-          />
-        </>
-      )}
-    </div>
-  )
-  }else{
-      return (
+  if (chainId == 2443544213400835) {
+    // TODO get from config
+    return (
+      <div className='flex-column align-center'>
+        <h1 className='text-xl'>Deposit Linked ERC-20 Token</h1>
+        <TokenInput />
+        {tokenAddress && (
+          <>
+            <RecipientInput onRecipientChange={setTo} recipient={to} />
+            <BalanceDisplay balanceData={balanceData} />
+            <TokenAmountInput
+              balance={balanceData ? balanceData.value : BigInt(0)}
+              decimals={balanceData ? balanceData.decimals : 0}
+              onAmountChange={setAmount}
+            />
+            <Button
+              text='Send tokens'
+              onClick={handleSendClick}
+              isLoading={isPending}
+              isDisabled={
+                !to || !amount || amount === '0' || isPending || amount > ethers.parseUnits(allowance, tokenDigits)
+              }
+            />
+          </>
+        )}
+      </div>
+    )
+  } else {
+    return (
       <div className='flex-column align-center'>
         <h1 className='text-xl'>Send Linked ERC-20 Token</h1>
         <button className='btn btn-wide w-[100%]' onClick={() => openModal({ view: 'Account' })}>
           Connect to Fluence Network
         </button>
       </div>
-      )
+    )
   }
 }

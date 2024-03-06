@@ -69,10 +69,12 @@ export default function SendToken() {
 
   const tokenDigits = 18 // TODO get from config
 
-  const fvmTo = address ?  {
-    addrType: DELEGATED,
-    payload: encoder.encode(['bytes'], [ethers.solidityPacked(['uint8', 'bytes20'], [EAM_ACTOR, address])]),
-  } : {}
+  const fvmTo = address
+    ? {
+        addrType: DELEGATED,
+        payload: encoder.encode(['bytes'], [ethers.solidityPacked(['uint8', 'bytes20'], [EAM_ACTOR, address])]),
+      }
+    : {}
 
   const contractCallArgs = {
     address: contractAddress,
@@ -84,7 +86,7 @@ export default function SendToken() {
 
   const { error: estimateError } = useSimulateContract(contractCallArgs)
   const { data, writeContract, isPending, error } = useWriteContract()
-  console.log('estimate error', estimateError);
+  console.log('estimate error', estimateError)
 
   const {
     isLoading,

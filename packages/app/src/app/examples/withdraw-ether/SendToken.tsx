@@ -124,7 +124,8 @@ export default function SendToken() {
     }
   }, [txSuccess, txError])
 
-  if ( chainId == 2443544213400835 ){  // TODO get from config
+  if (chainId == 2443544213400835) {
+    // TODO get from config
     return (
       <div className='flex-column align-center'>
         <h1 className='text-xl'>Withdraw Linked ERC-20 Token</h1>

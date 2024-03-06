@@ -4,5 +4,5 @@
 import SendToken from './SendToken.tsx'
 
 export default function page() {
-    return <SendToken />
+  return <SendToken />
 }

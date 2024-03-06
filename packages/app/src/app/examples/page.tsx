@@ -11,10 +11,10 @@ const ExampleItems = [
     url: '/examples/linked-token',
   },
   {
-    title: 'Send Ether',
+    title: 'Send Funds between Subnets',
     description: 'Sending Ether to another address is the most basic, common transaction that you can do.',
     image: EtherIcon.src,
-    url: '/examples/send-ether',
+    url: '/examples/deposit',
   },
   {
     title: 'Send ERC20 Token',
