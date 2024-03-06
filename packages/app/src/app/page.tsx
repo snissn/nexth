@@ -1,15 +1,41 @@
-import { LinkComponent } from '@/components/LinkComponent'
-import { SITE_DESCRIPTION } from '@/utils/site'
+import { CardList } from '@/components/CardList'
+
+import EtherIcon from '@/assets/icons/ethereum.png'
+import TokenIcon from '@/assets/icons/token.png'
+
+const ExampleItems = [
+  {
+    title: 'Manage Linked USDC Tokens',
+    description: 'Use IPC to send axelar USDC to your Fluence subnet',
+    image: EtherIcon.src,
+    url: '/examples/linked-token',
+  },
+  {
+    title: 'Send Funds between Subnets',
+    description: 'Sending Ether to another address is the most basic, common transaction that you can do.',
+    image: EtherIcon.src,
+    url: '/examples/deposit',
+  },
+  {
+    title: 'Send ERC20 Token',
+    description:
+      'ERC20 introduces a standard interface for fungible tokens. Use this example to send any ERC20 to another address.',
+    image: TokenIcon.src,
+    url: '/examples/send-token',
+  },
+]
 
 export default function Home() {
   return (
     <>
-      <h2 className='text-lg'>Next.js + Ethereum starter kit</h2>
-      <p>{SITE_DESCRIPTION}</p>
+      <h2 className='text-xl'>Nexth Examples</h2>
 
-      <p className='mt-4'>
-        <LinkComponent href='/examples'>View examples</LinkComponent> to bootstrap development.
+      <p className='mb-4'>
+        All these examples can be found in the main repo at <code>src/app/examples</code> to help you bootstrap
+        development. You can delete the entire folder before deploying your own App.
       </p>
+
+      <CardList title='Examples' items={ExampleItems} />
     </>
   )
 }

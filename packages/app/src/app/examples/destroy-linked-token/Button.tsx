@@ -8,7 +8,7 @@ type ButtonProps = {
 }
 
 const Button: React.FC<ButtonProps> = ({ isLoading, isDisabled, onClick, text }) => (
-  <button className='btn btn-wide w-[100%]' onClick={onClick} disabled={isDisabled}>
+  <button className='btn mt-10 btn-wide w-[100%]' onClick={onClick} disabled={isDisabled}>
     {isLoading ? <span className='loading loading-dots loading-sm'></span> : text}
   </button>
 )

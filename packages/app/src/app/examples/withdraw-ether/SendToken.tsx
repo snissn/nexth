@@ -150,7 +150,7 @@ export default function SendToken() {
     return (
       <div className='flex-column align-center'>
         <h1 className='text-xl'>Withdraw Funds</h1>
-        <button className='btn btn-wide w-[100%]' onClick={() => openModal({ view: 'Account' })}>
+        <button className='btn mt-10 btn-wide w-[100%]' onClick={() => openModal({ view: 'Networks' })}>
           Connect to Fluence IPC Network
         </button>
       </div>
