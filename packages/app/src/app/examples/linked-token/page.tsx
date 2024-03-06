@@ -1,5 +1,5 @@
-import SendToken from '../send-linked-token/SendToken.tsx'
-import SendTokenUp from '../destroy-linked-token/SendTokenUp.tsx'
+import SendToken from './SendToken.tsx'
+import SendTokenUp from './SendTokenUp.tsx'
 
 export default function Home() {
   return (
