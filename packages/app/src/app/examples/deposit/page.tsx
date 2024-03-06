@@ -5,11 +5,11 @@ export default function Home() {
     <>
       <div className='flex-column align-center '>
         <div className='flex w-full'>
-          <div className='flex p-10 w-1/2 card bg-slate-950 rounded-box place-items-center'>
+          <div className='flex p-10 card bg-slate-950 rounded-box place-items-stretch'>
             <DepositFunds />
           </div>
           <div className='divider divider-horizontal'></div>
-          <div className='flex p-10 w-1/2 card bg-slate-950 rounded-box place-items-center'>
+          <div className='flex p-10 card bg-slate-950 rounded-box place-items-stretch'>
             <WithdrawFunds />
           </div>
         </div>

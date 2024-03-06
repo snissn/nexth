@@ -42,8 +42,8 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, 
     <>
       <div className='flex flex-col items-center space-y-4'>
         <div>
-          <label className='block text-sm font-medium text-gray-200'>Amount to withdraw:</label>
-          <div className='mt-1 flex rounded-md shadow-sm'>
+          <label className='block text-sm font-medium text-gray-200 m-2'>Amount to withdraw:</label>
+          <div className='flex rounded-md shadow-sm m-2'>
             <input
               type='text'
               value={amount ? ethers.formatUnits(amount, tokenDigits) : 0}
@@ -57,7 +57,7 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, 
           </div>
         </div>
       </div>
-      <div className='flex items-center m-1'>
+      <div className='flex items-center m-2'>
         <input
           type='range'
           min='0'
