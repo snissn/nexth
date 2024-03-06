@@ -8,14 +8,12 @@ type TokenInputProps = {
 
 const TokenInput: React.FC<TokenInputProps> = ({ tokenAddress }) => {
   return (
-    <label className='form-control w-full'>
-      <div className='label'>
-        <label className='text-xs font-medium text-gray-200'>ERC-20 Token address</label>
+      <div className='flex flex-col items-left space-y-4 mt-10'>
+        <div>
+          <label className='block text-sx font-medium text-gray-200 m-2'>Token Address:</label>
+          <label className='block text-xs font-medium text-gray-400 m-4'> {tokenAddress}</label>
+        </div>
       </div>
-      <div className='label mt-0'>
-        <span className='label-text text-xs'>{tokenAddress}</span>
-      </div>
-    </label>
   )
 }
 

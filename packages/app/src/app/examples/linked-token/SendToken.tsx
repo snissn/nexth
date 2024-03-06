@@ -2,6 +2,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import Allowance from '../components/Allowance'
+import H1 from '../components/H1'
 import BalanceDisplay from '../components/BalanceDisplay'
 import Button from '../components/Button'
 import RecipientInput from '../components/RecipientInput'
@@ -98,7 +99,7 @@ export default function SendToken() {
   if (chainId == 314159) {
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Deposit Linked ERC-20 Token</h1>
+        <H1 title="Deposit Linked ERC-20 Token" />
         <TokenInput tokenAddress={tokenAddress} />
         {tokenAddress && (
           <>
@@ -133,7 +134,7 @@ export default function SendToken() {
   } else {
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Send Linked ERC-20 Token</h1>
+        <H1 title="Deposit Linked ERC-20 Token" />
         <button className='btn btn-wide w-[100%]' onClick={() => openModal({ view: 'Networks' })}>
           Connect to Calibration Network
         </button>

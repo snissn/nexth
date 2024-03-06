@@ -119,14 +119,12 @@ const Allowance = ({ tokenAddress, contractAddress, amount, allowance, setAllowa
 
   return (
     <>
-      <label className='form-control w-full'>
-        <div className='label'>
-          <label className='font-medium text-gray-200'>Allowance:</label>
+      <div className='flex flex-col items-left space-y-4'>
+        <div>
+          <label className='block text-sm font-medium text-gray-200 m-2'>Allowance:</label>
+          <label className='block text-sm font-medium text-gray-400 m-4'> {allowanceDataStr}</label>
         </div>
-        <div className='label mt-0'>
-          <span className='label-text font-medium'>{allowanceDataStr}</span>
-        </div>
-      </label>
+      </div>
       <Button
         text='Update allowance'
         onClick={handleClickAllowance}

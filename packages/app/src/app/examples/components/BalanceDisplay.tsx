@@ -11,7 +11,7 @@ type BalanceDisplayProps = {
 }
 
 const BalanceDisplay: React.FC<BalanceDisplayProps> = ({ balanceData }) => (
-  <div className='stats shadow join-item m-2 p-8 mt-10 bg-[#282c33]'>
+  <div className='stats shadow join-item m-2 p-8 bg-[#282c33]'>
     <div className='stat'>
       {balanceData && balanceData.formatted ? (
         <>

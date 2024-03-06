@@ -2,6 +2,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import TokenInput from '../components/TokenInput'
+import H1 from '../components/H1'
 import RecipientInput from '../components/RecipientInput'
 import Button from '../components/Button'
 import BalanceDisplay from '../components/BalanceDisplay'
@@ -128,7 +129,7 @@ export default function WithdrawFunds() {
     // TODO get from config
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Withdraw Funds</h1>
+        <H1 title="Withdraw Funds" />
         <>
           <RecipientInput onRecipientChange={setTo} recipient={to} />
           <BalanceDisplay balanceData={balanceData} />
@@ -149,7 +150,7 @@ export default function WithdrawFunds() {
   } else {
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Withdraw Funds</h1>
+        <H1 title="Withdraw Funds" />
         <button className='btn mt-10 btn-wide w-[100%]' onClick={() => openModal({ view: 'Networks' })}>
           Connect to Fluence IPC Network
         </button>

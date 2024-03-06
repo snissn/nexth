@@ -1,6 +1,7 @@
 // page.tsx
 'use client'
 import React, { useState, useEffect } from 'react'
+import H1 from '../components/H1'
 import TokenInput from '../components/TokenInput'
 import RecipientInput from '../components/RecipientInput'
 import Button from '../components/Button'
@@ -123,7 +124,7 @@ export default function DepositFunds() {
   if (chainId == 314159) {
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Deposit Funds</h1>
+        <H1 title="Deposit Funds" />
         <>
           <RecipientInput onRecipientChange={setTo} recipient={to} />
           <BalanceDisplay balanceData={balanceData} />
@@ -144,7 +145,7 @@ export default function DepositFunds() {
   } else {
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Deposit Funds</h1>
+        <H1 title="Deposit Funds" />
         <button className='btn mt-10 btn-wide w-[100%]' onClick={() => openModal({ view: 'Networks' })}>
           Connect to Calibration Network
         </button>

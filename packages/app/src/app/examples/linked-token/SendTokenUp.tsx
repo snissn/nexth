@@ -1,6 +1,7 @@
 // page.tsx
 'use client'
 import React, { useState, useEffect } from 'react'
+import H1 from '../components/H1'
 import TokenInput from '../components/TokenInput'
 import RecipientInput from '../components/RecipientInput'
 import Button from '../components/Button'
@@ -97,7 +98,7 @@ export default function SendTokenUp() {
     // TODO get from config
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Withdraw Linked ERC-20 Token</h1>
+        <H1 title="Withdraw Linked ERC-20 Token" />
         <TokenInput />
         {tokenAddress && (
           <>
@@ -109,7 +110,7 @@ export default function SendTokenUp() {
               onAmountChange={setAmount}
             />
             <Button
-              text='Send tokens'
+              text='Withdraw tokens'
               onClick={handleSendClick}
               isLoading={isPending}
               isDisabled={
@@ -123,7 +124,7 @@ export default function SendTokenUp() {
   } else {
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Send Linked ERC-20 Token</h1>
+        <H1 title="Withdraw Linked ERC-20 Token" />
         <button className='btn mt-10 btn-wide w-[100%]' onClick={() => openModal({ view: 'Networks' })}>
           Connect to Fluence Network
         </button>
