@@ -48,14 +48,14 @@ const fundAbi = [
   },
 ]
 
-const subnetAddress = '0x5dc06b5a4c79646f332b2e6fdccc20138cd61faa' // TODO get from config
-const subnetId = { root: 314159, route: [subnetAddress] }
+const subnetAddress = '0x77aa40b105843728088c0132e43fc44348881da8' // TODO get from config
+const subnetId = { root: 314159, route: [] }
 const EAM_ACTOR = 10
 const DELEGATED = 4
 
 const encoder = new ethers.AbiCoder()
 
-export default function SendToken() {
+export default function WithdrawFunds() {
   const { address } = useAccount()
   const chainId = useChainId()
   const [to, setTo] = useState()
@@ -97,7 +97,11 @@ export default function SendToken() {
   })
 
   const handleSendClick = async () => {
-    writeContract(contractCallArgs)
+    console.log(contractCallArgs)
+    const x = await writeContract(contractCallArgs)
+    console.log('fund', x)
+    console.log(isPending)
+    console.log(error)
   }
 
   const { data: balanceData } = useBalance({
@@ -120,10 +124,11 @@ export default function SendToken() {
     }
   }, [txSuccess, txError])
 
-  if (chainId == 314159) {
+  if (chainId == 2443544213400835) {
+    // TODO get from config
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Deposit Funds</h1>
+        <h1 className='text-xl'>Withdraw Funds</h1>
         <>
           <RecipientInput onRecipientChange={setTo} recipient={to} />
           <BalanceDisplay balanceData={balanceData} />
@@ -144,9 +149,9 @@ export default function SendToken() {
   } else {
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Send Linked ERC-20 Token</h1>
+        <h1 className='text-xl'>Withdraw Funds</h1>
         <button className='btn mt-10 btn-wide w-[100%]' onClick={() => openModal({ view: 'Networks' })}>
-          Connect to Calibration Network
+          Connect to Fluence IPC Network
         </button>
       </div>
     )
