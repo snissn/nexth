@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from 'react'
 import TokenInput from './TokenInput'
 import RecipientInput from './RecipientInput'
-import Button from './Button'
-import BalanceDisplay from './BalanceDisplay'
-import TokenAmountInput from './TokenAmountInput'
+import Button from '../linked-token/components/Button'
+import BalanceDisplay from '../linked-token/components/BalanceDisplay'
+import TokenAmountInput from '../linked-token/components/TokenAmountInput'
 import {
   useAccount,
   useWriteContract,
