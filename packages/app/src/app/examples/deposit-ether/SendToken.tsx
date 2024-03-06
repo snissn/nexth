@@ -1,11 +1,11 @@
 // page.tsx
 'use client'
 import React, { useState, useEffect } from 'react'
-import TokenInput from './TokenInput'
-import RecipientInput from './RecipientInput'
-import Button from '../linked-token/components/Button'
-import BalanceDisplay from '../linked-token/components/BalanceDisplay'
-import TokenAmountInput from '../linked-token/components/TokenAmountInput'
+import TokenInput from '../components/TokenInput'
+import RecipientInput from '../components/RecipientInput'
+import Button from '../components/Button'
+import BalanceDisplay from '../components/BalanceDisplay'
+import TokenAmountInput from '../components/TokenAmountInput'
 import {
   useAccount,
   useWriteContract,

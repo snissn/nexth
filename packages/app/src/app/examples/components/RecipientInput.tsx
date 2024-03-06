@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { isValidAddress } from '../../utils/address'
+import { isValidAddress } from '../utils/address'
 
 type RecipientInputProps = {
   recipient: string
