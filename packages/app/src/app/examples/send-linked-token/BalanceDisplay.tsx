@@ -18,7 +18,7 @@ const BalanceDisplay: React.FC<BalanceDisplayProps> = ({ balanceData }) => (
           <div className='stat-figure text-secondary'>
             <img className='opacity-25 ml-10' width={50} src={TokenImage.src} alt='token' />
           </div>
-          <div className='stat-title'>Your balance</div>
+          <div className='stat-title text-gray-200'>Your balance</div>
           <div className='stat-value text-lg w-[150px]'>{`${balanceData.formatted} ${balanceData.symbol}`}</div>
         </>
       ) : (

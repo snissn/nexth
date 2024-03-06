@@ -38,7 +38,27 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, 
   }
 
   return (
+  <>
+  <div className="flex flex-col items-center space-y-4">
     <div>
+      <label className="block text-sm font-medium text-gray-200">
+        Amount to withdraw:
+      </label>
+      <div className="mt-1 flex rounded-md shadow-sm">
+        <input
+          type='text'
+          value={amount ? ethers.formatUnits(amount, tokenDigits) : 0}
+          placeholder='Amount'
+          className='input input-bordered w-full max-w-xs rounded-r-none text-gray-300'
+          onChange={handleAmountChange}
+        />
+        <span className="inline-flex items-center px-3 rounded-r-md border border-l-0 input-bordered bg-gray-850 text-gray-300 text-sm">
+          USDC
+        </span>
+      </div>
+    </div>
+    </div>
+    <div className="flex items-center m-1">
       <input
         type='range'
         min='0'
@@ -48,16 +68,11 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, 
         step='1'
         onChange={(e) => handleSliderChange(Number(e.target.value))}
       />
-      <input
-        type='text'
-        value={amount ? ethers.formatUnits(amount, tokenDigits) : 0}
-        placeholder='Amount'
-        className='input input-bordered w-full max-w-xs'
-        onChange={handleAmountChange}
-      />
       <output className='px-2'>{`${sliderValue}%`}</output>
     </div>
-  )
+  </>
+)
+
 }
 
 export default TokenAmountInput

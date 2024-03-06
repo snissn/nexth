@@ -98,8 +98,8 @@ export default function SendToken() {
   if (chainId == 314159) {
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Withdraw Linked ERC-20 Token</h1>
-        <TokenInput />
+        <h1 className='text-xl'>Deposit Linked ERC-20 Token</h1>
+        <TokenInput tokenAddress={tokenAddress} />
         {tokenAddress && (
           <>
             <RecipientInput onRecipientChange={setTo} recipient={to} />

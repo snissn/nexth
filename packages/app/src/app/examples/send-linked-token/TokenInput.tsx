@@ -3,18 +3,19 @@ import { isValidAddress } from '../utils/address'
 import { Address } from '../types'
 
 type TokenInputProps = {
-  setTokenAddress: (address: Address) => void
   tokenAddress: Address
 }
 
-const TokenInput: React.FC<TokenInputProps> = ({ setTokenAddress, tokenAddress }) => {
+const TokenInput: React.FC<TokenInputProps> = ({ tokenAddress }) => {
   return (
-    <label className='form-control w-full mt-10'>
+    <label className='form-control w-full'>
       <div className='label'>
-        <span className='label-text'>ERC-20 Token address</span>
+      <label className="text-xs font-medium text-gray-200">
+        ERC-20 Token address
+      </label>
       </div>
-      <div className='label'>
-        <span className='label-text'>{tokenAddress}</span>
+      <div className='label mt-0'>
+        <span className='label-text text-xs'>{tokenAddress}</span>
       </div>
     </label>
   )
