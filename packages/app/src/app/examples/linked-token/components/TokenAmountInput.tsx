@@ -35,8 +35,8 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, 
     }
   }
 
-  if(balance == 0 ){
-      return <></>
+  if (balance == 0) {
+    return <></>
   }
   return (
     <>
