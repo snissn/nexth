@@ -6,37 +6,54 @@ import RecipientInput from './RecipientInput'
 import Button from './Button'
 import BalanceDisplay from './BalanceDisplay'
 import TokenAmountInput from './TokenAmountInput'
-import { useAccount, useWriteContract, useSimulateContract, useWaitForTransactionReceipt, useContractRead } from 'wagmi'
+import {
+  useAccount,
+  useWriteContract,
+  useSimulateContract,
+  useWaitForTransactionReceipt,
+  useContractRead,
+  useBalance,
+} from 'wagmi'
 import { useToast } from '@/context/Toaster'
-import { useBalance } from 'wagmi'
-import { ethers } from 'ethers'
-import { parseAbi } from 'viem'
-import { erc20Abi } from 'viem'
-import Allowance from './Allowance'
 import { useChainId } from 'wagmi'
 import { useWeb3Modal } from '@web3modal/wagmi/react'
+import { ethers } from 'ethers'
 
-const sendLinkedTokenAbi = [
+const fundAbi = [
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'recipient',
-        type: 'address',
+        components: [
+          { internalType: 'uint64', name: 'root', type: 'uint64' },
+          { internalType: 'address[]', name: 'route', type: 'address[]' },
+        ],
+        internalType: 'struct SubnetID',
+        name: 'subnetId',
+        type: 'tuple',
       },
       {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
+        components: [
+          { internalType: 'uint8', name: 'addrType', type: 'uint8' },
+          { internalType: 'bytes', name: 'payload', type: 'bytes' },
+        ],
+        internalType: 'struct FvmAddress',
+        name: 'to',
+        type: 'tuple',
       },
     ],
-    name: 'linkedTransfer',
+    name: 'fund',
     outputs: [],
-    stateMutability: 'nonpayable',
+    stateMutability: 'payable',
     type: 'function',
   },
 ]
 
+const subnetAddress = '0x5dc06b5a4c79646f332b2e6fdccc20138cd61faa' // TODO get from config
+const subnetId = { root: 314159, route: [subnetAddress] }
+const EAM_ACTOR = 10
+const DELEGATED = 4
+
+const encoder = new ethers.AbiCoder()
 
 export default function SendToken() {
   const { address } = useAccount()
@@ -52,15 +69,22 @@ export default function SendToken() {
 
   const tokenDigits = 18 // TODO get from config
 
+  const fvmTo = address ?  {
+    addrType: DELEGATED,
+    payload: encoder.encode(['bytes'], [ethers.solidityPacked(['uint8', 'bytes20'], [EAM_ACTOR, address])]),
+  } : {}
+
   const contractCallArgs = {
     address: contractAddress,
-    abi: sendLinkedTokenAbi,
-    functionName: 'linkedTransfer',
-    args: [to!, amount],
+    abi: fundAbi,
+    functionName: 'fund',
+    args: [subnetId, fvmTo],
+    value: amount,
   }
 
   const { error: estimateError } = useSimulateContract(contractCallArgs)
   const { data, writeContract, isPending, error } = useWriteContract()
+  console.log('estimate error', estimateError);
 
   const {
     isLoading,
@@ -98,23 +122,21 @@ export default function SendToken() {
     return (
       <div className='flex-column align-center'>
         <h1 className='text-xl'>Withdraw Linked ERC-20 Token</h1>
-          <>
-            <RecipientInput onRecipientChange={setTo} recipient={to} />
-            <BalanceDisplay balanceData={balanceData} />
-            <TokenAmountInput
-              balance={balanceData ? balanceData.value : BigInt(0)}
-              decimals={balanceData ? balanceData.decimals : 0}
-              onAmountChange={setAmount}
-            />
-            <Button
-              text='Send tokens'
-              onClick={handleSendClick}
-              isLoading={isPending}
-              isDisabled={
-                !to || !amount || amount === '0' || isPending 
-              }
-            />
-          </>
+        <>
+          <RecipientInput onRecipientChange={setTo} recipient={to} />
+          <BalanceDisplay balanceData={balanceData} />
+          <TokenAmountInput
+            balance={balanceData ? balanceData.value : BigInt(0)}
+            decimals={balanceData ? balanceData.decimals : 0}
+            onAmountChange={setAmount}
+          />
+          <Button
+            text='Send tokens'
+            onClick={handleSendClick}
+            isLoading={isPending}
+            isDisabled={!to || !amount || amount === '0' || isPending}
+          />
+        </>
       </div>
     )
   } else {
