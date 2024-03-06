@@ -35,6 +35,9 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, 
     }
   }
 
+  if(balance == 0 ){
+      return <></>
+  }
   return (
     <>
       <div className='flex flex-col items-center space-y-4'>

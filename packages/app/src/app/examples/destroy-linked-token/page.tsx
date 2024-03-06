@@ -1,11 +1,11 @@
 // page.tsx
 'use client'
 import React, { useState, useEffect } from 'react'
-import TokenInput from './TokenInput'
-import RecipientInput from './RecipientInput'
-import Button from './Button'
-import BalanceDisplay from './BalanceDisplay'
-import TokenAmountInput from './TokenAmountInput'
+import TokenInput from './../send-linked-token/TokenInput'
+import RecipientInput from './../send-linked-token/RecipientInput'
+import Button from './../send-linked-token/Button'
+import BalanceDisplay from './../send-linked-token/BalanceDisplay'
+import TokenAmountInput from './../send-linked-token/TokenAmountInput'
 import { useAccount, useWriteContract, useSimulateContract, useWaitForTransactionReceipt, useContractRead } from 'wagmi'
 import { useToast } from '@/context/Toaster'
 import { useBalance } from 'wagmi'
@@ -97,7 +97,7 @@ export default function SendTokenUp() {
     // TODO get from config
     return (
       <div className='flex-column align-center'>
-        <h1 className='text-xl'>Send Linked ERC-20 Token</h1>
+        <h1 className='text-xl'>Send xLinked ERC-20 Token</h1>
         <TokenInput />
         {tokenAddress && (
           <>
