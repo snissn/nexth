@@ -135,7 +135,7 @@ export default function SendToken() {
     return (
       <div className='flex-column align-center'>
         <H1 title="Deposit Linked ERC-20 Token" />
-        <button className='btn btn-wide w-[100%]' onClick={() => openModal({ view: 'Networks' })}>
+        <button className='btn mt-10 btn-wide w-[100%]' onClick={() => openModal({ view: 'Networks' })}>
           Connect to Calibration Network
         </button>
       </div>
