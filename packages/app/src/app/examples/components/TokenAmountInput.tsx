@@ -13,7 +13,7 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balanceData, onAmou
 
   const balance = balanceData ? balanceData.value : 0
   const tokenDigits = balanceData ? balanceData.decimals : 0
-  const symbol =balanceData ? balanceData.symbol : ""
+  const symbol = balanceData ? balanceData.symbol : ''
 
   const maxAmount = Number(balance) / Math.pow(10, tokenDigits)
 

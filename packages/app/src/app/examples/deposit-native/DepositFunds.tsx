@@ -128,10 +128,7 @@ export default function DepositFunds() {
         <>
           <RecipientInput onRecipientChange={setTo} recipient={to} />
           <BalanceDisplay balanceData={balanceData} />
-          <TokenAmountInput
-            balanceData={balanceData}
-            onAmountChange={setAmount}
-          />
+          <TokenAmountInput balanceData={balanceData} onAmountChange={setAmount} />
           <Button
             text='Send tokens'
             onClick={handleSendClick}

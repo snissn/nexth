@@ -104,7 +104,7 @@ export default function SendToken() {
           <>
             <RecipientInput onRecipientChange={setTo} recipient={to} />
             <BalanceDisplay balanceData={balanceData} />
-            <TokenAmountInput balanceData={balanceData} onAmountChange={setAmount}/>
+            <TokenAmountInput balanceData={balanceData} onAmountChange={setAmount} />
             <Allowance
               contractAddress={contractAddress}
               amount={amount}
