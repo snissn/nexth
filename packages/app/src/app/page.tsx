@@ -33,12 +33,9 @@ const ExampleItems = [
 export default function Home() {
   return (
     <>
-      <h2 className='text-xl'>Nexth Examples</h2>
+      <h2 className='text-xl'>Bridge FLT and USDC into the Fluence subnet</h2>
 
-      <p className='mb-4'>
-        All these examples can be found in the main repo at <code>src/app/examples</code> to help you bootstrap
-        development. You can delete the entire folder before deploying your own App.
-      </p>
+      <p className='mb-4'>Loreum Ipsum. Helpful introduction and summary for the user can go here. Lorem Ipsum.</p>
 
       <CardList title='Examples' items={ExampleItems} />
     </>
