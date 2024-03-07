@@ -134,8 +134,7 @@ export default function WithdrawFunds() {
           <RecipientInput onRecipientChange={setTo} recipient={to} />
           <BalanceDisplay balanceData={balanceData} />
           <TokenAmountInput
-            balance={balanceData ? balanceData.value : BigInt(0)}
-            decimals={balanceData ? balanceData.decimals : 0}
+            balanceData={balanceData}
             onAmountChange={setAmount}
           />
           <Button

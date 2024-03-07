@@ -104,11 +104,7 @@ export default function SendTokenUp() {
           <>
             <RecipientInput onRecipientChange={setTo} recipient={to} />
             <BalanceDisplay balanceData={balanceData} />
-            <TokenAmountInput
-              balance={balanceData ? balanceData.value : BigInt(0)}
-              decimals={balanceData ? balanceData.decimals : 0}
-              onAmountChange={setAmount}
-            />
+            <TokenAmountInput balanceData={balanceData} onAmountChange={setAmount} />
             <Button
               text='Withdraw tokens'
               onClick={handleSendClick}

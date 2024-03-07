@@ -51,8 +51,6 @@ export default function SendToken() {
   const { showToast } = useToast()
   const contractAddress = '0xCcbF0c7799667323E52b4cAc41a9be5275e4EaF9' // TODO get from config
 
-  const tokenDigits = 18 // TODO get from config
-
   const contractCallArgs = {
     address: contractAddress,
     abi: sendLinkedTokenAbi,
@@ -79,6 +77,7 @@ export default function SendToken() {
     address: address,
     token: tokenAddress,
   })
+  const tokenDigits = balanceData ? balanceData.decimals : 0
 
   useEffect(() => {
     setTo(address)
@@ -105,12 +104,7 @@ export default function SendToken() {
           <>
             <RecipientInput onRecipientChange={setTo} recipient={to} />
             <BalanceDisplay balanceData={balanceData} />
-            <TokenAmountInput
-              balance={balanceData ? balanceData.value : BigInt(0)}
-              decimals={balanceData ? balanceData.decimals : 0}
-              onAmountChange={setAmount}
-              tokenDigits={tokenDigits}
-            />
+            <TokenAmountInput balanceData={balanceData} onAmountChange={setAmount}/>
             <Allowance
               contractAddress={contractAddress}
               amount={amount}

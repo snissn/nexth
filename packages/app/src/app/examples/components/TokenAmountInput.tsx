@@ -3,16 +3,19 @@ import React, { useState, useEffect } from 'react'
 import { ethers } from 'ethers'
 
 type TokenAmountInputProps = {
-  balance: bigint
-  decimals: number
   onAmountChange: (amount: string) => void
+  balanceData: any
 }
 
-const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, onAmountChange, tokenDigits }) => {
+const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balanceData, onAmountChange }) => {
   const [amount, setAmount] = useState('')
   const [sliderValue, setSliderValue] = useState(0)
 
-  const maxAmount = Number(balance) / Math.pow(10, decimals)
+  const balance = balanceData ? balanceData.value : 0
+  const tokenDigits = balanceData ? balanceData.decimals : 0
+  const symbol =balanceData ? balanceData.symbol : ""
+
+  const maxAmount = Number(balance) / Math.pow(10, tokenDigits)
 
   useEffect(() => {
     onAmountChange(amount)
@@ -52,7 +55,7 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balance, decimals, 
               onChange={handleAmountChange}
             />
             <span className='inline-flex items-center px-3 rounded-r-md border border-l-0 input-bordered bg-gray-850 text-gray-300 text-sm'>
-              USDC
+              {symbol}
             </span>
           </div>
         </div>
