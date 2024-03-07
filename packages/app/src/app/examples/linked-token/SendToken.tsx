@@ -99,7 +99,7 @@ export default function SendToken() {
   if (chainId == 314159) {
     return (
       <div className='flex-column align-center'>
-        <H1 title="Deposit Linked ERC-20 Token" />
+        <H1 title='Deposit Linked ERC-20 Token' />
         <TokenInput tokenAddress={tokenAddress} />
         {tokenAddress && (
           <>
@@ -134,7 +134,7 @@ export default function SendToken() {
   } else {
     return (
       <div className='flex-column align-center'>
-        <H1 title="Deposit Linked ERC-20 Token" />
+        <H1 title='Deposit Linked ERC-20 Token' />
         <button className='btn mt-10 btn-wide w-[100%]' onClick={() => openModal({ view: 'Networks' })}>
           Connect to Calibration Network
         </button>

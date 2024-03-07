@@ -98,7 +98,7 @@ export default function SendTokenUp() {
     // TODO get from config
     return (
       <div className='flex-column align-center'>
-        <H1 title="Withdraw Linked ERC-20 Token" />
+        <H1 title='Withdraw Linked ERC-20 Token' />
         <TokenInput />
         {tokenAddress && (
           <>
@@ -124,7 +124,7 @@ export default function SendTokenUp() {
   } else {
     return (
       <div className='flex-column align-center'>
-        <H1 title="Withdraw Linked ERC-20 Token" />
+        <H1 title='Withdraw Linked ERC-20 Token' />
         <button className='btn mt-10 btn-wide w-[100%]' onClick={() => openModal({ view: 'Networks' })}>
           Connect to Fluence Network
         </button>

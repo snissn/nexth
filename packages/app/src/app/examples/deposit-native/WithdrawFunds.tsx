@@ -129,7 +129,7 @@ export default function WithdrawFunds() {
     // TODO get from config
     return (
       <div className='flex-column align-center'>
-        <H1 title="Withdraw Funds" />
+        <H1 title='Withdraw Funds' />
         <>
           <RecipientInput onRecipientChange={setTo} recipient={to} />
           <BalanceDisplay balanceData={balanceData} />
@@ -150,7 +150,7 @@ export default function WithdrawFunds() {
   } else {
     return (
       <div className='flex-column align-center'>
-        <H1 title="Withdraw Funds" />
+        <H1 title='Withdraw Funds' />
         <button className='btn mt-10 btn-wide w-[100%]' onClick={() => openModal({ view: 'Networks' })}>
           Connect to Fluence IPC Network
         </button>
