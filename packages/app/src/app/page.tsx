@@ -11,7 +11,13 @@ const ExampleItems = [
     url: '/examples/linked-token',
   },
   {
-    title: 'Send Funds between Subnets',
+    title: 'Send Funds between Subnets (Token)',
+    description: 'Sending tokens on the parent subnet that are minted as native currency on the subnet.',
+    image: EtherIcon.src,
+    url: '/examples/deposit-token',
+  },
+  {
+    title: 'Send Funds between Subnets (Native)',
     description: 'Sending Ether to another address is the most basic, common transaction that you can do.',
     image: EtherIcon.src,
     url: '/examples/deposit-native',

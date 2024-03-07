@@ -45,7 +45,7 @@ const TokenAmountInput: React.FC<TokenAmountInputProps> = ({ balanceData, onAmou
     <>
       <div className='flex flex-col items-center space-y-4'>
         <div>
-          <label className='block text-sm font-medium text-gray-200 m-2'>Amount to withdraw:</label>
+          <label className='block text-sm font-medium text-gray-200 m-2'>Amount to transfer:</label>
           <div className='flex rounded-md shadow-sm m-2'>
             <input
               type='text'
