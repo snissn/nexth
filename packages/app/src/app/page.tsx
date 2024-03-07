@@ -14,7 +14,7 @@ const ExampleItems = [
     title: 'Send Funds between Subnets',
     description: 'Sending Ether to another address is the most basic, common transaction that you can do.',
     image: EtherIcon.src,
-    url: '/examples/deposit',
+    url: '/examples/deposit-native',
   },
   {
     title: 'Send ERC20 Token',
