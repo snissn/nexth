@@ -6,26 +6,26 @@ import TokenIcon from '@/assets/icons/token.png'
 const ExampleItems = [
   {
     title: 'Manage Linked USDC Tokens',
-    description: 'Use IPC to send axelar USDC to your Fluence subnet',
+    description: 'Send axelarUSDC tokens from Filecoin Calibration to the Fluence IPC Subnet using IPC Linked Token',
     image: EtherIcon.src,
     url: '/examples/linked-token',
   },
   {
     title: 'Send Funds between Subnets (Token)',
-    description: 'Sending tokens on the parent subnet that are minted as native currency on the subnet.',
+    description: 'Fund and withdraw Fluent Tokens from Ipc Subnet and Filecoin Calibration',
     image: EtherIcon.src,
     url: '/examples/deposit-token',
   },
   {
     title: 'Send Funds between Subnets (Native)',
-    description: 'Sending native value to an IPC subnet',
+    description: 'Fund and withdraw native tFIL from IPC subnet.',
     image: EtherIcon.src,
     url: '/examples/deposit-native',
   },
   {
-    title: 'Fund Token based Subnet with Axelar ERC20 Token',
+    title: 'Fund Token based Subnet with Axelar ERC20 Token (TODO)',
     description:
-      'With a test Fluent token hosted on mumbai - use axelar to bridge the token to filecoin calibration and a token funded IPC subnet',
+      'Bridge Mumbai Fluent token to Filecoin Calibration and a token funded IPC subnet using Axelar',
     image: TokenIcon.src,
     url: '/examples/axelar-token',
   },
