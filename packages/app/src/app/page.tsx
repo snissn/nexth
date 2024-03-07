@@ -18,16 +18,16 @@ const ExampleItems = [
   },
   {
     title: 'Send Funds between Subnets (Native)',
-    description: 'Sending Ether to another address is the most basic, common transaction that you can do.',
+    description: 'Sending native value to an IPC subnet',
     image: EtherIcon.src,
     url: '/examples/deposit-native',
   },
   {
-    title: 'Send ERC20 Token',
+    title: 'Fund Token based Subnet with Axelar ERC20 Token',
     description:
-      'ERC20 introduces a standard interface for fungible tokens. Use this example to send any ERC20 to another address.',
+      'With a test Fluent token hosted on mumbai - use axelar to bridge the token to filecoin calibration and a token funded IPC subnet',
     image: TokenIcon.src,
-    url: '/examples/send-token',
+    url: '/examples/axelar-token',
   },
 ]
 
