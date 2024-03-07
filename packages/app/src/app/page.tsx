@@ -24,8 +24,7 @@ const ExampleItems = [
   },
   {
     title: 'Fund Token based Subnet with Axelar ERC20 Token (TODO)',
-    description:
-      'Bridge Mumbai Fluent token to Filecoin Calibration and a token funded IPC subnet using Axelar',
+    description: 'Bridge Mumbai Fluent token to Filecoin Calibration and a token funded IPC subnet using Axelar',
     image: TokenIcon.src,
     url: '/examples/axelar-token',
   },
