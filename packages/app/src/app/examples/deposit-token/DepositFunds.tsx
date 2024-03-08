@@ -7,6 +7,8 @@ import RecipientInput from '../components/RecipientInput'
 import Button from '../components/Button'
 import BalanceDisplay from '../components/BalanceDisplay'
 import TokenAmountInput from '../components/TokenAmountInput'
+import Allowance from '../components/Allowance'
+
 import {
   useAccount,
   useWriteContract,
@@ -54,7 +56,7 @@ const fundAbi = [
   },
 ]
 
-const subnetAddress = '0x5dc06b5a4c79646f332b2e6fdccc20138cd61faa' // TODO get from config
+const subnetAddress = '0xb4dc563a3efafd02118b72ace6f51930e7daa18f' // TODO get from config
 const subnetId = { root: 314159, route: [subnetAddress] }
 const EAM_ACTOR = 10
 const DELEGATED = 4
@@ -67,14 +69,12 @@ export default function DepositFunds() {
   const [to, setTo] = useState()
   const [amount, setAmount] = useState('0')
   const [allowance, setAllowance] = useState('0')
-  const [tokenAddress, setTokenAddress] = useState('0x721823209A298d4685142bebbbBF02d8907Eae17') // TODO get from config
+  const [tokenAddress, setTokenAddress] = useState('0x20c324EabcE392F2f58f7b5DDe8308CDA218F9c9') // TODO get from config
 
   const { open: openModal } = useWeb3Modal()
 
   const { showToast } = useToast()
-  const contractAddress = '0xBEd97BC74b11cdA28de1e86fb9596E97de4BdBCb' // Gateway address on calibnet TODO get from config
-
-  const tokenDigits = 18 // TODO get from config
+  const contractAddress = '0xfA6D6c9ccDE5B8a34690F0377F07dbf932b457aC' // Gateway address on calibnet TODO get from config
 
   const fvmTo = address
     ? {
@@ -111,6 +111,8 @@ export default function DepositFunds() {
     token: tokenAddress,
   })
 
+  const tokenDigits = balanceData ? balanceData.decimals : 0
+
   useEffect(() => {
     setTo(address)
   }, [address])
@@ -135,11 +137,19 @@ export default function DepositFunds() {
           <RecipientInput onRecipientChange={setTo} recipient={to} />
           <BalanceDisplay balanceData={balanceData} />
           <TokenAmountInput balanceData={balanceData} onAmountChange={setAmount} />
+            <Allowance
+              contractAddress={contractAddress}
+              amount={amount}
+              tokenAddress={tokenAddress}
+              allowance={allowance}
+              setAllowance={setAllowance}
+              tokenDigits={tokenDigits}
+            />
           <Button
             text='Send tokens'
             onClick={handleSendClick}
             isLoading={isPending}
-            isDisabled={!to || !amount || amount === '0' || isPending}
+            isDisabled={!to || !amount || amount === '0' || isPending || amount > ethers.parseUnits(allowance, tokenDigits) }
           />
         </>
       </div>

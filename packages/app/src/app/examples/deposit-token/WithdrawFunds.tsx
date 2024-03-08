@@ -49,7 +49,7 @@ const fundAbi = [
   },
 ]
 
-const subnetAddress = '0x77aa40b105843728088c0132e43fc44348881da8' // TODO get from config
+const subnetAddress = '0xb4dc563a3efafd02118b72ace6f51930e7daa18f' // TODO get from config
 const subnetId = { root: 314159, route: [] }
 const EAM_ACTOR = 10
 const DELEGATED = 4
@@ -66,7 +66,7 @@ export default function WithdrawFunds() {
   const { open: openModal } = useWeb3Modal()
 
   const { showToast } = useToast()
-  const contractAddress = '0xBEd97BC74b11cdA28de1e86fb9596E97de4BdBCb' // Gateway address on calibnet TODO get from config
+  const contractAddress = '0xfA6D6c9ccDE5B8a34690F0377F07dbf932b457aC' // Gateway address on calibnet TODO get from config
 
   const tokenDigits = 18 // TODO get from config
 
@@ -125,7 +125,7 @@ export default function WithdrawFunds() {
     }
   }, [txSuccess, txError])
 
-  if (chainId == 2443544213400835) {
+  if (chainId == 3365521537997311) {
     // TODO get from config
     return (
       <div className='flex-column align-center'>
