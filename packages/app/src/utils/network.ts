@@ -15,7 +15,8 @@ const fluence = defineChain({
     name: 'Fluence',
     symbol: 'FLT',
   },
-  id: 2443544213400835,
+  id: 2175508586850951,
+  // TODO chain id in config
 })
 
 import { filecoinCalibration, polygonMumbai, localhost, Chain } from 'viem/chains'

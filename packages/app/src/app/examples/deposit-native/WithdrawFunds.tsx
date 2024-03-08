@@ -125,7 +125,7 @@ export default function WithdrawFunds() {
     }
   }, [txSuccess, txError])
 
-  if (chainId == 2443544213400835) {
+  if (chainId == 2175508586850951) {
     // TODO get from config
     return (
       <div className='flex-column align-center'>
