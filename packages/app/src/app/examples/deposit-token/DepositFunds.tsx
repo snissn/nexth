@@ -576,39 +576,38 @@ const DELEGATED = 4
 const encoder = new ethers.AbiCoder()
 // JavaScript equivalents of Solidity structs
 class DelegatedAddress {
-    constructor(namespace, length, buffer) {
-        this.namespace = BigInt(namespace);
-        this.length = BigInt(length);
-        this.buffer = buffer;
-    }
+  constructor(namespace, length, buffer) {
+    this.namespace = BigInt(namespace)
+    this.length = BigInt(length)
+    this.buffer = buffer
+  }
 }
 
 class FvmAddress {
-    constructor(addrType, payload) {
-        this.addrType = addrType;
-        this.payload = payload;
-    }
+  constructor(addrType, payload) {
+    this.addrType = addrType
+    this.payload = payload
+  }
 }
 
 // The function to create a FvmAddress from an Ethereum address
 function from(addr) {
-    // Ensure the address is valid
-    if (!ethers.isAddress(addr)) {
-        throw new Error('Invalid Ethereum address');
-    }
+  // Ensure the address is valid
+  if (!ethers.isAddress(addr)) {
+    throw new Error('Invalid Ethereum address')
+  }
 
-    // Convert address to a byte array and construct the DelegatedAddress
-    const buffer = ethers.solidityPacked(["address"], [addr]);
-    const delegatedAddress = new DelegatedAddress(EAM_ACTOR, 20, buffer);
+  // Convert address to a byte array and construct the DelegatedAddress
+  const buffer = ethers.solidityPacked(['address'], [addr])
+  const delegatedAddress = new DelegatedAddress(EAM_ACTOR, 20, buffer)
 
-   const payload = encoder.encode(
-        ['tuple(uint64,uint128,bytes)'],
-        [[delegatedAddress.namespace.toString(), delegatedAddress.length.toString(), delegatedAddress.buffer]]
-    );
-    // Construct and return the FvmAddress object
-    return new FvmAddress(DELEGATED, payload);
+  const payload = encoder.encode(
+    ['tuple(uint64,uint128,bytes)'],
+    [[delegatedAddress.namespace.toString(), delegatedAddress.length.toString(), delegatedAddress.buffer]]
+  )
+  // Construct and return the FvmAddress object
+  return new FvmAddress(DELEGATED, payload)
 }
-
 
 export default function DepositFunds() {
   const { address } = useAccount()
@@ -623,7 +622,7 @@ export default function DepositFunds() {
   const { showToast } = useToast()
   const contractAddress = '0xfA6D6c9ccDE5B8a34690F0377F07dbf932b457aC' // Gateway address on calibnet TODO get from config
 
-  const fvmTo = address ? from(address): {}
+  const fvmTo = address ? from(address) : {}
 
   const contractCallArgs = {
     address: contractAddress,
