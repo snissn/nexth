@@ -35,7 +35,9 @@ export default function Home() {
     <>
       <h2 className='text-xl'>IPC Subnet Token and Funding Tool </h2>
 
-      <p className='mb-4'>Use the links below to fund subnets and bridge tokens using Axelar and IPC Message passing.</p>
+      <p className='mb-4'>
+        Use the links below to fund subnets and bridge tokens using Axelar and IPC Message passing.
+      </p>
 
       <CardList title='Examples' items={ExampleItems} />
     </>
