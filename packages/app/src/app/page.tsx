@@ -6,13 +6,13 @@ import TokenIcon from '@/assets/icons/token.png'
 const ExampleItems = [
   {
     title: 'Manage Linked USDC Tokens',
-    description: 'Send axelarUSDC tokens from Filecoin Calibration to the Fluence IPC Subnet using IPC Linked Token',
+    description: 'Send axelarUSDC tokens from Filecoin Calibration to the IPC Subnet using IPC Linked Token',
     image: EtherIcon.src,
     url: '/examples/linked-token',
   },
   {
     title: 'Send Funds between Subnets (Token)',
-    description: 'Fund and withdraw Fluent Tokens from Ipc Subnet and Filecoin Calibration',
+    description: 'Fund and withdraw Tokens from Ipc Subnet and Filecoin Calibration',
     image: EtherIcon.src,
     url: '/examples/deposit-token',
   },
@@ -24,7 +24,7 @@ const ExampleItems = [
   },
   {
     title: 'Fund Token based Subnet with Axelar ERC20 Token (TODO)',
-    description: 'Bridge Mumbai Fluent token to Filecoin Calibration and a token funded IPC subnet using Axelar',
+    description: 'Bridge a Mumbai based token to Filecoin Calibration and IPC subnet using Axelar',
     image: TokenIcon.src,
     url: '/examples/axelar-token',
   },
@@ -33,9 +33,9 @@ const ExampleItems = [
 export default function Home() {
   return (
     <>
-      <h2 className='text-xl'>Bridge FLT and USDC into the Fluence subnet</h2>
+      <h2 className='text-xl'>IPC Subnet Token and Funding Tool </h2>
 
-      <p className='mb-4'>Loreum Ipsum. Helpful introduction and summary for the user can go here. Lorem Ipsum.</p>
+      <p className='mb-4'>Use the links below to fund subnets and bridge tokens using Axelar and IPC Message passing.</p>
 
       <CardList title='Examples' items={ExampleItems} />
     </>

@@ -122,7 +122,7 @@ export default function SendTokenUp() {
       <div className='flex-column align-center'>
         <H1 title='Withdraw Linked ERC-20 Token' />
         <button className='btn mt-10 btn-wide w-[100%]' onClick={() => openModal({ view: 'Networks' })}>
-          Connect to Fluence Network
+          Connect to IPC Network
         </button>
       </div>
     )

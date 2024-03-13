@@ -1,4 +1,4 @@
-export const SITE_NAME = 'FLT Bridge'
+export const SITE_NAME = 'IPC Bridge'
 export const SITE_DESCRIPTION = 'Quickly bridge tokens'
 export const SITE_URL = 'https://nexth.vercel.app'
 

@@ -19,6 +19,6 @@ NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=
 ```
 
 
-create a token on  https://testnet.interchain.axelar.dev/polygon that will serve as the test Fluent token. 
+create a token on  https://testnet.interchain.axelar.dev/polygon that will serve as the test ERC20 token. 
 
 Bridge the token using axelar to filecoin calibration.

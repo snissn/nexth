@@ -1,7 +1,7 @@
 import { defineChain } from 'viem'
 
-const fluence = defineChain({
-  blockExplorers: { default: { name: 'TBD', url: 'https://place.holder.com' } }, // TODO
+const ipcChain = defineChain({
+  blockExplorers: { default: { name: 'TBD', url: 'https://place.holder.com' } }, // TODO determine how to load network with a null Block Explorer
   rpcUrls: {
     default: {
       http: ['http://localhost:8010/proxy'], // need cors proxy
@@ -9,11 +9,11 @@ const fluence = defineChain({
     },
   },
   testnet: true,
-  name: 'Fluence',
+  name: 'IPC Subnet',
   nativeCurrency: {
     decimals: 18,
-    name: 'Fluence',
-    symbol: 'FLT',
+    name: 'IPC',
+    symbol: 'IPC',
   },
   id: 2175508586850951,
   // TODO chain id in config
@@ -21,7 +21,7 @@ const fluence = defineChain({
 
 import { filecoinCalibration, polygonMumbai, localhost, Chain } from 'viem/chains'
 
-let chains = [filecoinCalibration, polygonMumbai, fluence] as [Chain, ...Chain[]]
+let chains = [filecoinCalibration, polygonMumbai, ipcChain] as [Chain, ...Chain[]]
 console.log('Chains', chains)
 
 export const ETH_CHAINS = chains
